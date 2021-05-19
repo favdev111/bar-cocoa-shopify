@@ -1,0 +1,155 @@
+{% comment %}
+  DATE CALCULATION
+  FOR NEW PRODUCTS.
+  As of now, it uses created_at
+{% endcomment %}
+
+{% assign dateStart = product.created_at | date: '%s' %}
+{% assign nowTimestamp = 'now' | date: '%s' %}
+
+{% comment %} difference in seconds {% endcomment %}
+{% assign diffSeconds = nowTimestamp | minus: dateStart %}
+
+{% comment %} difference in days {% endcomment %}
+{% assign diffDays = diffSeconds | divided_by: 3600 | divided_by: 24 %}
+
+{% if diffDays > 40 %}
+  {% assign productClass = "product-card" %}
+{% else %}
+  {% assign productClass = "product-card new" %}
+{% endif %}
+
+{% comment %}
+  END OF DATE CALCULATION
+{% endcomment %}
+
+<div class="{{productClass}} p-id-{{product.id}}">
+  <div class="product-card-content">
+    {% if product.available %}
+    <div class="add-to-cart-wrapper">
+      <div class="add-to-cart-mobile">
+        <div class="add-button flex atc-{{ product.id }}">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96.16 94.91">
+            <defs>
+              <style>
+                .a,
+                .b {
+                  fill: none;
+                  stroke: #fff;
+                  stroke-width: 6px;
+                }
+          
+                .a {
+                  stroke-linecap: round;
+                  stroke-linejoin: round;
+                }
+          
+                .b {
+                  stroke-miterlimit: 10;
+                }
+              </style>
+            </defs>
+            <polyline class="a" points="3 3 18.41 3 27.33 49.97 30.25 68.18 73.23 68.18" />
+            <path class="a" d="M284.06,353.2l-50.44,0Z" transform="translate(-206.28 -303.21)" />
+            <line class="a" x1="93.16" y1="14.48" x2="77.78" y2="49.99" />
+            <circle class="b" cx="65.92" cy="84.91" r="7" />
+            <circle class="b" cx="39.76" cy="84.91" r="7" />
+            <line class="a" x1="52.48" y1="6.41" x2="52.48" y2="33.03" />
+            <line class="a" x1="65.65" y1="19.72" x2="39.69" y2="19.72" />
+          </svg>
+        </div>
+        <div class="added-button flex hidden added-to-cart-{{ product.id }}">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          	 viewBox="0 0 28.2 20.1" xml:space="preserve">
+             <polygon class="check-svg" points="3.2,9.5 9.3,16 24.9,0.5 26.9,2.7 9.5,20.2 1,11.6 "/>
+          </svg>
+        </div>
+      </div>
+      <div class="add-to-cart atc-{{ product.id }}">
+        <div class="loading-rotator">
+          <img src="{{'rotator-arrow.svg' | asset_url}}"></img>
+        </div>
+        <div class="self-center">
+          <div class="atc-{{ product.id }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+              viewBox="0 0 24 24" xml:space="preserve">
+              <path class="arrow-up-white" d="M0,12l2.1,2.1l8.4-8.4V24h3V5.7l8.4,8.4L24,12L12,0L0,12z"/>
+            </svg>
+            <p>ADD TO CART</p>
+          </div>
+          <div class="hidden added-to-cart-{{ product.id }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            	 viewBox="0 0 28.2 20.1" xml:space="preserve">
+               <polygon class="arrow-up-white" points="3.2,9.5 9.3,16 24.9,0.5 26.9,2.7 9.5,20.2 1,11.6 "/>
+            </svg>
+            <a href="/cart">GO TO CART</a>
+          </div>
+          <div class="hidden atc-error-{{ product.id }}">
+            <p>Can't Add To Cart</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <a class="product-image" href="{{ product.url | within: collection }}">
+      <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="lazyload" />
+    </a>
+    <a href="{{ product.url | within: collection }}" class="text-link-orange block mb-0">{{ product.title }}</a>
+    {% if product.available %}
+      {% if product.compare_at_price != nil and product.compare_at_price > product.price %}
+      <div class="text-center">
+        <p class="inline mr-4">{{ product.price_min | money }}</p><p class="inline line-through">{{ product.compare_at_price | money }}</p>
+      </div>
+      {% else %}
+        <p>{% if product.price_varies %}{{ section.settings.from }}{% endif %} {{ product.price_min | money }}</p>
+      {% endif %}
+    {% else %}
+    <p>Out Of Stock</p>
+    {% endif %}
+  </div>
+
+  <!-- ADD-TO-CART FUNCTION -->
+  <script>
+    $(document).ready(_ => {
+
+        /* ****************************
+        *   Add to cart button handler
+        * ***************************/
+          const addToCartButtons = $(".atc-{{ product.id }}");
+          addToCartButtons.on('click', async (e) =>{
+              const data = {
+                  items: [
+                      {
+                          quantity: 1,
+                          id: "{{ product.selected_or_first_available_variant.id }}"
+                      }
+                  ]
+              };
+              $('.p-id-{{product.id}}').find('.add-to-cart').addClass('adding');
+              await atcAjax(data, onSuccess, onError);
+          })
+
+        /* ****************************
+        *   Add to cart callbacks
+        * ***************************/
+
+          function onSuccess(cart){
+            addToCartButtons.addClass('hidden');
+            $(".added-to-cart-{{ product.id }}").removeClass('hidden');
+            setTimeout(()=>{
+              $('.p-id-{{product.id}}').find('.add-to-cart').removeClass('adding');
+            },250);
+            updateCartIconAjax(cart.item_count)
+          }
+
+          function onError(error){
+            $(".atc-error-{{ product.id }}").removeClass('hidden');
+            setTimeout(()=>{
+              $('.p-id-{{product.id}}').find('.add-to-cart').removeClass('adding');
+            },250);
+          }
+    })
+
+  </script>
+
+</div>

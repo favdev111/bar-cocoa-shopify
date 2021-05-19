@@ -1,0 +1,77 @@
+<div class="sidebar-navigation">
+  
+{% if page.handle  != 'chocolate-history' %}
+<a href="/pages/chocolate-science" class="menu-subtitle">Chocolate History</a>
+{% endif %}  
+  
+<ul class="learn_menues">
+{% for link in linklists.chocolate-history.links %}
+  <li class="level1"><a href="{{ link.url }}">{{ link.title }}</a>
+{% if link.links != blank %}
+    {% for child_link in link.links %}  
+    <li class="level2"><a href= "{{ child_link.url }}">{{ child_link.title }}</a>
+    {% if child_link.links != blank %}      
+      {% for grandchild_link in child_link.links %}  
+        <li class="level3"><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+      {% endfor %}
+    {% endif %}   
+    </li>
+    {% endfor %}
+{% endif %} 
+</li>
+{% endfor %}
+</ul>
+</div>
+
+{% if page.handle  == 'chocolate-history' %}
+  <a href="/pages/learn" class="menu-subtitle">Learn more</a>
+{% endif %}
+
+<style>
+  .current-bradcrumb {
+	font-size: .9rem;
+}
+  .menu-subtitle{
+    font-family: Foglihten;
+    font-size: 1.2rem;
+    color: #ed6832;
+    margin-bottom: 1rem;
+    margin: 0 auto 15px;
+}
+  .sidebar-title{
+	font-family: Foglihten;
+	font-size: 1.5rem;
+	color: #ed6832;
+	border-bottom: 1px solid #ed6832;
+	margin-bottom: 1rem;
+	margin: 0 auto 15px;
+	width: 75px;
+}
+.learn_menues {
+	list-style-type: none;
+	margin: 0 0 20px 20px;
+}
+.learn_menues li::before {
+	content: "\2022";
+	color: #ed6832;
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	margin-left: -1em;
+}
+.learn_menues li.level1, .learn_menues li.level2 {
+	margin-bottom: 0;
+	transition: color 0.5s;
+}
+.learn_menues li.level1:hover, .learn_menues li.level2:hover, .learn_menues li.level3:hover {
+	color: #ed6832;
+	transition: color 0.5s;
+}
+.learn_menues li.level2{
+	padding-left: 20px;
+}
+.learn_menues  li.level3 {
+	margin-left: 40px;
+	margin-bottom: 0;
+}
+</style>

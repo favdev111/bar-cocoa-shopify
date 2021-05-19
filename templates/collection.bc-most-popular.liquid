@@ -1,0 +1,18 @@
+{%- layout none -%}
+{%- assign bc_shop_metafields = shop.metafields.bc-sf-filter -%}
+{%- if bc_shop_metafields.mostPopularEnable == 'true' -%}
+	{%- if bc_shop_metafields.settings contains 'mostPopularEnable":' -%}
+		{%- assign bc_most_popular_limit = bc_shop_metafields.mostPopularLimit | plus: 0 -%}
+	{%- else -%}
+		{%- assign bc_most_popular_limit = 4 -%}
+	{%- endif -%}
+	{%- if collection.products_count < bc_most_popular_limit -%}
+		{%- assign bc_most_popular_limit = collection.products_count -%}
+	{%- endif -%}
+	{"products":[
+	{%- for product in collection.products limit: bc_most_popular_limit -%}
+	{%- include 'bc-sf-filter-product-json', product: product  -%}
+	{%- if forloop.index < bc_most_popular_limit -%},{%- endif -%}
+	{%- endfor -%}
+	]}
+{%- endif -%}

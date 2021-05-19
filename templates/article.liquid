@@ -1,0 +1,47 @@
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count %}
+{% endif %}
+<section class="section-padding bg-gray product-single-card-section">
+  <div class="container">
+<h1 class="text-4xl sm:text-3xl">{{ article.title }}</h1>
+{% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+<p class="mb-2 italic"></p>{% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+{{ article.author }} @ {{ article.created_at }}</p>
+
+<div class="mt-6">{{ article.content }}</div>
+{% if blog.comments_enabled? %}
+<div class="mt-6">
+  <h2>{{ number_of_comments }} comments</h2>
+  {% paginate article.comments by 5 %}
+    {% for comment in article.comments %}
+      <div>
+        <div>{{ comment.content }}</div>
+        {{ comment.author }} @ {{ comment.created_at }}
+      </div>
+    {% endfor %}
+    {% if paginate.pages > 1 %}
+      {{ paginate | default_pagination }}
+    {% endif %}
+  {% endpaginate %}
+</div>
+
+  <div class="mt-6">
+    {% form 'new_comment', article %}
+      {{ form.errors | default_errors }}
+      <label for="CommentAuthor">Name</label>
+      <input type="text" name="comment[author]" id="CommentAuthor" placeholder="Name" value="{{ form.author }}" autocapitalize="words">
+
+      <label for="CommentEmail">Email</label>
+      <input type="email" name="comment[email]" id="CommentEmail" placeholder="Email" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+
+      <label for="CommentBody">Message</label>
+      <textarea name="comment[body]" id="CommentBody" placeholder="Message">{{ form.body }}</textarea>
+
+      <button type="submit" value="post" class="button-alt-outline">Submit</button>
+    {% endform %}
+  </div>
+
+</div>
+</section>
+{% endif %}

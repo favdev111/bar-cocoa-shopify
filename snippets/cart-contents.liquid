@@ -1,0 +1,13 @@
+{% comment %}
+
+  ––– REQUIRED JS CLASSES –––
+  .js-cart-fieldset – to add quantity data to the form
+  .js-cart-currencyNote – to show the currency note if not in default shop currency
+  .js-currency-active – to display / change the current currency
+  .js-cart-return – to close the minicart
+
+{% endcomment %}
+
+<script defer type="module" src="{{ "cart.bundle.js" | asset_url }}"></script>
+
+<div id="react-cart"></div>

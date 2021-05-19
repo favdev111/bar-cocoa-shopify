@@ -1,0 +1,40 @@
+<!--start-bc-recently-viewed-init-->
+{%- if template contains 'collection' or template contains 'product' -%}
+  {%- assign bc_shop_metafields = shop.metafields.bc-sf-filter -%}
+    {%- comment -%} Check enable {%- endcomment -%}
+    {%- if bc_shop_metafields.recentlyViewedEnable == 'true' -%}
+      <script>
+        if(typeof bcSfFilterParams == 'undefined'){
+          var bcSfFilterParams = {{ bc_settings }};
+        }
+      </script>
+
+      {% if template contains 'collection' %}
+      <script>
+        var bcRvParams = {
+          settings: {
+            isCollectionPage: true,
+            showOnCollectionPage: true
+          }
+        };
+      </script>
+      {% endif %}
+
+      {% if template contains 'product' %}
+      <script>
+        var bcRvParams = {
+          settings: {
+            isProductPage: true,
+            showOnProductPage: false
+          }
+        };
+        var bcOtpProductJsonData = {"products":[{%- include 'bc-sf-filter-product-json', product: product  -%}]};
+      </script>
+      {% endif %}
+
+      {%- comment -%} Include Lib {%- endcomment -%}
+      <script defer src="{{ 'bc-recently-viewed-product-lib.min.js' | asset_url }}"></script>
+      <script defer src="{{ 'bc-recently-viewed-product-init.js' | asset_url }}"></script>
+    {%- endif -%}
+  {%- endif -%}
+<!--end-bc-recently-viewed-init-->

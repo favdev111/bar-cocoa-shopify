@@ -1,0 +1,515 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400|Oswald:400|Roboto:400&display=swap"><link rel="stylesheet" href="https://cdn.pagefly.io/pagefly/2.15.2/css/main-style.css?t=20201228171226"><link rel="stylesheet" href="{{ 'pagefly.1da4d966.css' | asset_url }}">
+		  {% if product_5983650840730 == null %}{%- assign product_5983650840730 = all_products['virtual-chocolate-tasting-experience'] -%}{% endif %}<script>
+	window.__pageflyProducts = window.__pageflyProducts || {};
+	window.__pageflyProducts["5983650840730"] = {
+					id: {{product_5983650840730.id | json }},
+					handle: {{product_5983650840730.handle | json }},
+					title: {{product_5983650840730.title | json }},
+					type: {{product_5983650840730.type | json }},
+					url: {{product_5983650840730.url | json }},
+					vendor: {{product_5983650840730.vendor | json }},
+					variants: {{product_5983650840730.variants | json }},
+					options: {{product_5983650840730.options | json }},
+					media: {{product_5983650840730.media | json }},
+					has_only_default_variant: {{product_5983650840730.has_only_default_variant | json }},
+					options_with_values: {{product_5983650840730.options_with_values | json }},
+					selected_variant: {{product_5983650840730.selected_variant | json }},
+					selected_or_first_available_variant: {{product_5983650840730.selected_or_first_available_variant | json }},
+					tags: {{product_5983650840730.tags | json }},
+					template_suffix: {{product_5983650840730.template_suffix | json }},
+					featured_image: {{product_5983650840730.featured_image | json }},
+					featured_media: {{product_5983650840730.featured_media | json }},
+					images: {{product_5983650840730.images | json }}
+				};
+window.__pageflyProducts["{{product.id}}"] = {
+					id: {{product.id | json }},
+					handle: {{product.handle | json }},
+					title: {{product.title | json }},
+					type: {{product.type | json }},
+					url: {{product.url | json }},
+					vendor: {{product.vendor | json }},
+					variants: {{product.variants | json }},
+					options: {{product.options | json }},
+					media: {{product.media | json }},
+					has_only_default_variant: {{product.has_only_default_variant | json }},
+					options_with_values: {{product.options_with_values | json }},
+					selected_variant: {{product.selected_variant | json }},
+					selected_or_first_available_variant: {{product.selected_or_first_available_variant | json }},
+					tags: {{product.tags | json }},
+					template_suffix: {{product.template_suffix | json }},
+					featured_image: {{product.featured_image | json }},
+					featured_media: {{product.featured_media | json }},
+					images: {{product.images | json }}
+				};
+	</script><div class="__pf" id="__pf"><div data-pf-type="Body" class="sc-pRgDJ fzXWJx pf-8e649755"><div data-pf-type="Layout" class="pf-ab478e64"><div data-pf-type="ProductPreview" class="sc-pJVLq dIjrXL pf-bff3179b">{% comment %}
+  TODO
+ - go to cart link on add product
+{% endcomment %}
+<style>
+  #atc-klaviyo-notification.button-alt.klaviyo-bis-trigger.show {
+    display: block !important;
+  }
+  #atc-klaviyo-notification.button-alt.klaviyo-bis-trigger.hide {
+    display: none !important;
+  }
+</style>
+
+<script>
+  window.productJSON = {{ product | json }};
+  window.cartJSON = {{ cart | json }};
+  window.tagArray = [];
+  window.productIcons = {
+    "vegan1":{
+      img:"{{'p-icon-vegan.svg' | asset_url }}",
+      tooltip: "Uses no animal products, but sweetened with non-organic refined sugar",
+      label:"Vegan"
+    },
+    "vegan2":{
+      img:"{{'p-icon-vegan.svg' | asset_url }}",
+      tooltip: "Organic refined sugar or alternative sweetener, and no animal products (ie defacto vegan)",
+      label:"Vegan+"
+    },
+    "vegan3":{
+      img:"{{'p-icon-vegan.svg' | asset_url }}",
+      tooltip: "Vegan-certified by vegan.org, which requires a $100 application fee per product",
+      label:"Vegan++"
+    },
+    "dairy2":{
+      img:"{{'p-icon-maybe-dairy.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes dairy",
+      label:"Trace Dairy"
+    },
+    "dairy1":{
+      img:"{{'p-icon-dairy.svg' | asset_url }}",
+      tooltip: "Contains dairy",
+      label:"Dairy"
+    },
+    "dairy3":{
+      img:"{{'p-icon-no-dairy.svg' | asset_url }}",
+      tooltip: "Dairy Free",
+      label:"Dairy Free"
+    },
+    "peanuts2":{
+      img:"{{'p-icon-maybe-peanuts.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes peanuts",
+      label:"Trace Peanuts"
+    },
+    "peanuts1":{
+      img:"{{'p-icon-peanuts.svg' | asset_url }}",
+      tooltip: "Contains peanuts",
+      label:"Peanuts"
+    },
+    "peanuts3":{
+      img:"{{'p-icon-no-peanuts.svg' | asset_url }}",
+      tooltip: "Peanut Free",
+      label:"Peanut Free"
+    },
+    "treenuts2":{
+      img:"{{'p-icon-maybe-treenuts.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes treenuts",
+      label:"Trace Treenut"
+    },
+    "treenuts1":{
+      img:"{{'p-icon-treenuts.svg' | asset_url }}",
+      tooltip: "Contains treenuts",
+      label:"Treenuts"
+    },
+    "treenuts3":{
+      img:"{{'p-icon-no-treenuts.svg' | asset_url }}",
+      tooltip: "Treenut Free",
+      label:"Treenut Free"
+    },
+    "soy2":{
+      img:"{{'p-icon-maybe-soy.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes soy",
+      label:"Trace Soy"
+    },
+    "soy1":{
+      img:"{{'p-icon-soy.svg' | asset_url }}",
+      tooltip: "Contains soy",
+      label:"Contains Soy"
+    },
+    "soy3":{
+      img:"{{'p-icon-no-soy.svg' | asset_url }}",
+      tooltip: "Soy Free",
+      label:"Soy Free"
+    },
+    "wheat2":{
+      img:"{{'p-icon-maybe-wheat.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes wheat",
+      label:"Trace Gluten"
+    },
+    "wheat1":{
+      img:"{{'p-icon-wheat.svg' | asset_url }}",
+      tooltip: "Contains Gluten",
+      label:"Contains Gluten"
+    },
+    "wheat3":{
+      img:"{{'p-icon-no-wheat.svg' | asset_url }}",
+      tooltip: "Gluten Free",
+      label:"Gluten Free"
+    },
+    "corn2":{
+      img:"{{'p-icon-maybe-corn.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes corn",
+      label:"Trace Corn"
+    },
+    "corn1":{
+      img:"{{'p-icon-corn.svg' | asset_url }}",
+      tooltip: "Contains Corn",
+      label:"Contains Corn"
+    },
+    "corn3":{
+      img:"{{'p-icon-no-corn.svg' | asset_url }}",
+      tooltip: "Corn Free",
+      label:"Corn Free"
+    },
+    "farm1":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Bean to Bar",
+      label: "Bean to Bar",
+    },
+    "farm2":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Direct-Source Cacao",
+      label: "Direct Sourced",
+    },
+    "farm3":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Value-Added",
+      label: "Value-Added",
+    },
+    "farm4":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Tree to Bar",
+      label: "Tree to Bar",
+    },
+    "organic1":{
+      img:"{{'p-icon-organic.svg' | asset_url }}",
+      tooltip: "Organic Sugar",
+      label: "Organic",
+    },
+    "organic2":{
+      img:"{{'p-icon-organic.svg' | asset_url }}",
+      tooltip: "Organic Cacao",
+      label: "Organic+",
+    },
+    "organic3":{
+      img:"{{'p-icon-organic.svg' | asset_url }}",
+      tooltip: "Organic Cacao & Sugar",
+      label: "Organic++",
+    },
+    "organic4":{
+      img:"{{'p-cert-usda-organic.svg' | asset_url }}",
+      tooltip: "Organic-Certified Product (USDA/EU)",
+      label: "Organic",
+    },
+    "wown":{
+      img:"{{'p-icon-wown.svg' | asset_url }}",
+      tooltip: "Woman Owned",
+      label: "Woman Owned",
+    },
+    "bipoc":{
+      img:"{{'p-icon-bipoc.svg' | asset_url }}",
+      tooltip: "BIPOC Owned",
+      label: "BIPOC Owned",
+    },
+    "fown":{
+      img:"{{'p-icon-fown.svg' | asset_url }}",
+      tooltip: "Family Owned",
+      label: "Family Owned",
+    },
+    "cert-EU Organic":{
+      img:"{{'p-cert-eu-organic.png' | asset_img_url : 'master' }}",
+      tooltip: "Certified EU Organic",
+      label: "EU Organic",
+    },
+    "cert-Fair Trade":{
+      img:"{{'p-cert-fair-trade.png' | asset_img_url : 'master' }}",
+      tooltip: "Certified Fair Trade",
+      label: "Fair Trade",
+    },
+    "cert-Kosher Dairy":{
+      img:"{{'p-cert-kosher-dairy.svg' | asset_url }}",
+      tooltip: "Certified Kosher Dairy",
+      label: "Kosher Dairy",
+    },
+    "cert-USDA Organic":{
+      img:"{{'p-cert-usda-organic.svg' | asset_url }}",
+      tooltip: "Certified USDA Organic",
+      label: "USDA Organic",
+    },
+    "cert-Vegan":{
+      img:"{{'p-cert-vegan.svg' | asset_url }}",
+      tooltip: "Certified Vegan",
+      label: "Vegan",
+    },
+    "cert-Halal":{
+      img:"{{'p-cert-halal.svg' | asset_url }}",
+      tooltip: "Certified Halal",
+      label: "Halal",
+    },
+    "cert-Non-GMO Project":{
+      img:"{{'p-cert-non-gmo.svg' | asset_url }}",
+      tooltip: "Certified Non-GMO",
+      label: "Non-GMO",
+    },
+    "cert-cert-OU Kosher Parve":{
+      img:"{{'p-cert-pareve.svg' | asset_url }}",
+      tooltip: "Certified Pareve",
+      label: "Pareve",
+    },
+    "cert-Rainforest Alliance":{
+      img:"{{'p-cert-rainforest.svg' | asset_url }}",
+      tooltip: "Certified by the Rainforest Alliance",
+      label: "Rainforest Alliance",
+    },
+  };
+</script>
+{% for tag in product.tags %}
+  <script>
+    window.tagArray.push("{{tag}}");
+  </script>
+{% endfor %}
+<div class="hidden">
+  {% for variant in product.variants %}
+    {{variant.id}}
+  {% endfor %}
+</div>
+{% comment %}
+  The "judgeme-stars-loader" is selected in react and rendered in the React ProductHeader component
+{% endcomment %}
+<div id="judgeme-stars-loader" class="hidden">
+  {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
+</div>
+
+<section class="section-padding bg-gray product-single-card-section pre-populated">
+  <script>
+    window.productSinglePopulated = function(){
+      $(".product-single-card-section").removeClass("pre-populated");
+    }
+  </script>
+  <div class="container">
+    {% include 'react-product-header' with productId: product.id, productHandle: product.handle %}
+  </div>
+</section>
+<section class="bg-gray">
+{% unless product.handle == "chocolate-gift-boxes" %}
+</section>
+<section class="section-padding-small text-center bg-green">
+  <p class="max-w-900 mx-auto bold mb-0 leading-6">Shipping: Free in the continental US above $60. Warm Weather surcharge ($4.99) applies in FL and HI. Express and international shipping calculated at checkout.</p>
+</section>
+<section class="section-padding bg-backgroundGray product-info">
+  <div class="container info-section-container">
+    <div class="info-section" id="region">
+      <p class="pre-title">Cacao Region</p>
+      <a></a>
+      <p class="desc"></p>
+    </div>
+    <div class="info-section image" id="region-image">
+      <img src=""/>
+    </div>
+    <div class="info-section" id="estate">
+      <p class="pre-title">Cacao Estate</p>
+      <a></a>
+      <p class="desc"></p>
+    </div>
+    <div class="info-section" id="strain">
+      <p class="pre-title">Cacao Strain</p>
+      <a></a>
+      <p  class="desc"></p>
+    </div>
+  </div>
+</section>
+{% endunless %}
+<section class="section-padding relative" style="min-height: 400px" id="estate-image">
+  <div class="background-image">
+    <img src="{{ 'default-strain.jpg' | asset_img_url : 'master' }}"/>
+    <div class="overlay bg-backgroundDark opacity-50"/>
+  </div>
+</section>
+<section class="section-padding bg-white">
+  <div class="container-small">
+    <h2 class="font-fancy text-center">Reviews</h2>
+    <div>
+      {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-gray">
+  <div class="container">
+    <h2 class="text-center mb-12">You May Also Like</h2>
+    {% assign min = 0 %}
+    {% assign max = product.collections.length | minus: 1 %}
+    {% assign diff = max | minus: min %}
+    {% assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min %}
+    {% assign firstProductCollection = product.collections[randomNumber] %}
+    {% assign handle = firstProductCollection.handle %}
+    {% assign slider_container_class = "slider-container-" | append: handle %}
+    {% include 'product-slider' with collection: collections[handle], slider_container_class: slider_container_class %}
+  </div>
+</section>
+<script src="https://unpkg.com/normalize-diacritics@latest/dist/normalize-diacritics.umd.min.js"></script>
+<script>
+  var normalize = window.NormalizeDiacritics.normalize;
+
+  async function fetchCollection(handle){
+    console.log("Getting collection for: " + handle);
+    return window.fetch('https://chocorush.myshopify.com/api/2019-07/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json',
+        "X-Shopify-Storefront-Access-Token":"fb27cb12def10c0f876cbfb4058f761b",
+        "Accept":'application/json' },
+      body: JSON.stringify({ query: `
+          {
+            collectionByHandle(handle: "`+handle+`") {
+              id
+              image {
+                originalSrc
+              }
+              description,
+              descriptionHtml,
+              title,
+              handle
+            }
+          }
+        ` })
+    })
+    .then(res => res.json())
+    .then(res => populatePage(res.data, handle))
+    .catch(function(res){
+      if(res.error){return false;}
+    });
+  }
+
+  function populatePage(data,handle){
+    if(!data.collectionByHandle){return false;}
+    var col = data.collectionByHandle;
+    var title = col.title;
+    console.log(col);
+    var tag = handle.split(/\s*\-\s*/g)[0];
+    var elementBox = $("#"+tag);
+
+    $(elementBox).find("a").text(col.title).attr('href',`/collections/${col.handle}`);
+    $(elementBox).find(".desc").html(col.descriptionHtml);
+
+    if(tag === 'region' || tag === 'estate'){
+      if(col.image !== null){
+        console.log("Image is valid, setting src");
+        $("#"+tag+"-image").find("img").attr("src",col.image.originalSrc);
+        $("#"+tag+"-image").addClass("populated")
+      } else if(tag === 'region') {
+        $("#"+tag+"-image").remove();
+      }
+    }
+    $(elementBox).addClass("populated");
+    return true;
+  }
+
+
+  var ObjectifyTags = function ObjectifyTags(arr) {
+  var finalObj = {};
+  arr.forEach(function (item, i) {
+    var splitItem = item.split(/\s*\-\s*/g);
+    if (splitItem.length === 1) return;
+
+    if (typeof finalObj[splitItem[0]] === "undefined") {
+      finalObj[splitItem[0]] = [splitItem[1]];
+    } else {
+      finalObj[splitItem[0]].push(splitItem[1]);
+    }
+  });
+  return finalObj;
+  };
+
+  function restructureString(value){
+    return value.replace(/\s+/g, '-').toLowerCase();
+  }
+
+  var tagObject = ObjectifyTags(window.tagArray);
+
+  function handleError(error = null, prefix = null){
+    if (prefix){
+      console.log(error);
+      $("#"+prefix).remove();
+      if(prefix === "region"){
+        $("#"+prefix+"-image").remove();
+      }
+    }
+    else if (error){
+      //console.log(error);
+    }
+    else{
+      //console.log("welp, some sorta thing didn't work");
+    }
+  }
+
+  var buildHandle = async function(tagPrefix, tag){
+    if(typeof tag === 'undefined'){
+      handleError("Tag Not Found",tagPrefix);
+      return false;
+    }
+    else{
+      var normalizeTag = await normalize(tagPrefix + "-" + tag[0]);
+      var finalResult = await fetchCollection(restructureString(normalizeTag))
+      if(!finalResult){
+        handleError("Tag is valid, but there no collection with that handle",tagPrefix);
+        return false;
+      }
+      return true;
+    }
+  }
+
+  var buildInfoSection = async function(){
+    var region = await buildHandle("region",tagObject.region);
+    var estate = await buildHandle("estate",tagObject.estate);
+    var strain = await buildHandle("strain",tagObject.strain);
+
+    if(!region && !estate && !strain){
+      $(".product-info").remove();
+    }
+  }
+
+  buildInfoSection();
+</script>
+{% comment %}
+  rest of product page goes here
+{% endcomment %}
+
+<div class="hidden py-8 border-b border-solid border-black">
+  <h1 class="h2">Collections:</h1>
+  {% for collection in product.collections %}
+    <div class="my-4">
+      <p>
+        <strong>Collection title: </strong>{{ collection.title }}
+      </p>
+      <p>
+        <strong>Collection description: </strong>{{ collection.description || "No collection description" }}
+      </p>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="hidden py-8 border-b border-solid border-black">
+  <h1 class="h2">Tags:</h1>
+  {% for tag in product.tags %}
+      <p>{{ tag }}</p>
+  {% endfor %}
+</div>
+
+<div class="hidden">
+{% section 'product-recommendations' %}
+</div>
+
+<style>
+  .tooltiptext{
+    left:5px!important;
+    font-size:.45rem!important;
+    width:70px!important;}
+    
+</style>
+
+</div><div data-container="true" class="sc-pZopv bjKdkd pf-c48a14a8" data-pf-type="Section"><div class="sc-pQQXS iWCqut" style="max-width: 1170px;"><div class="sc-qPjXN eYzxUD pf-de96c48a pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:15px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--12 pf-c-md--12 pf-c-lg--12"><div class="sc-pkUyL fTyjzF pf-759ade96" data-pf-type="Column"><div data-product-id="5983650840730" data-default-variant="37257863692442" data-pf-type="ProductBox" class="sc-pjGtN lgnAIx pf-8af7759a">{% assign defaultProduct = product %}{% assign product = product_5983650840730 %} {% if product != null %}{% form 'product', product, data-productid: product.id, class: "pf-product-form pf-form-b48af775" %}<div class="sc-qPjXN eYzxUD pf-a0b48af7 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:15px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-8a7dd96e" data-pf-type="Column"><div data-product-id="{{ product.id }}" data-pf-type="ProductImage2" class="sc-pYATD geuAXS pf-fbeac76e">{% assign images = product.images %}<div spacing="[object Object]" class="sc-pIvzE hHQGS"><div data-pf-type="MasterImage" class="sc-pAayJ fOa-DwG"><img src="{{ product.featured_image | img_url: 'x416.25', scale: 2 }}" alt="{{ product.featured_image.alt }}" draggable="false">{% assign _product = product %}<div data-pf-type="ProductImagePagination" class="sc-oUbIU kkgvSC">{% for i in (1..images.size) %}<span></span>{% endfor %}</div></div><div class="sc-pkURi jKvUwv {% if 5 < images.size %}arrow-all{%endif%}{% if 5 < images.size %} arrow-laptop{%endif%}{% if 5 < images.size %} arrow-tablet{%endif%}"><div data-pf-type="ProductImageList" class="sc-psQTH ITnEo">{% assign pf_all = '' %}{% assign pf_laptop = '' %}{% assign pf_tablet = '' %}{% assign pf_mobile = '' %}{% for i in (0..images.size) limit:images.size %}{% assign image = images[i] %}{% if true %}{% if i > 4 %}{% assign pf_all = 'all_hd' %}{% endif  %}{% if i > 4 %}{% assign pf_laptop = 'laptop_hd' %}{% endif  %}{% if i > 4 %}{% assign pf_tablet = 'tablet_hd' %}{% endif  %}{% if i > 4 %}{% assign pf_mobile = 'mobile_hd' %}{% endif  %}{% endif  %}<div class="sc-qPkqk kuHLLu pf-83e2f407 {{pf_all}} {{pf_laptop}} {{pf_tablet}} {{pf_mobile}}" data-img-id="{{ image.id }}" data-pf-type="ImageItem"><img src="{{ image.src | img_url: 'master' }}" alt="{{ image.alt }}" draggable="false"></div>{% endfor %} </div>{% if true %}<div data-pf-nav="prev" class="sc-pbXLt hyMGOk"><i class="fa fa-angle-left"></i></div><div data-pf-nav="next" class="sc-pbXLt hyMGOk"><i class="fa fa-angle-right"></i></div>{% endif  %}</div></div></div></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-6ea0a0b4" data-pf-type="Column"><h3 data-product-type="title" data-product-id="{{ product.id }}" data-pf-type="ProductText" class="sc-qPzgd jYlxvS pf-fb547574">{{ product.title }}</h3><div data-product-type="price" data-product-id="{{ product.id }}" data-pf-type="ProductText" class="sc-pcLzI gJGZti pf-75742353">{{ product.variants[0].price | money }}</div><div data-product-id="{{ product.id }}" data-combined="true" data-display="dropdown" data-label="true" data-pf-type="ProductVariant" class="sc-pQfSI jppKZ pf-2353a5f8" style="--pf-s-lg:16px; --pf-s-md:16px; --pf-s-sm:8px; --pf-s-xs:8px;"><div class="pf-p-variant"><select name="id" data-productid="{{ product.id }}">{% for variant in product.variants %}<option value="{{ variant.id }}">{{ variant.title }} - {% if variant.available != true %}Sold Out {% else %} {{ variant.price | money }} {% endif %}</option>{% endfor %}</select></div></div><div data-show-button="true" data-more="" data-less="" data-product-type="content" data-product-id="{{ product.id }}" data-pf-type="ProductText" class="sc-pcLzI gJGZti pf-a5f8b516">{{ product.content }}</div><div data-pf-type="Block" class="sc-oUbqx bgMQOP pf-d96e6ea0"><div data-product-id="{{ product.id }}" size="40" data-pf-type="ProductQuantity" class="sc-pQQAz daLzjN pf-b5167b72"><button data-quantity-action="decrease" data-quantity-disabled="true" type="button">-</button><input min="1" type="number" data-hidespinner="true" name="quantity" value="1"><button type="button" data-quantity-action="increase">+</button></div><button data-product-id="{{ product.id }}" data-checkout="same" class="sc-pcjuG uJAsR pf-c76e7bb7" data-soldout="Sold out" data-adding="Adding..." data-added="Thank you!" type="button" data-pf-type="ProductATC"><span>Add To Cart</span></button></div><a class="sc-pYbQl dqXhNs pf-7bb78a7d" data-product-id="{{ product.id }}" href="{{ product.url }}" data-pf-type="ProductViewDetails"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-b730fbea">View details</span></a></div></div></div>{% endform %}{% endif %}{% assign product = defaultProduct %}</div></div></div></div></div></div><div data-container="true" class="sc-pZopv bjKdkd pf-179bc51a" data-pf-type="Section"><div class="sc-pQQXS iWCqut" style="max-width: 1170px;"><div class="sc-qPjXN eYzxUD pf-7b610a1e pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:15px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--12 pf-c-md--12 pf-c-lg--12"><div class="sc-pkUyL fTyjzF pf-ca1f7b61" data-pf-type="Column"><h2 data-pf-type="Heading" class="sc-oTLFK lcHmGL pf-31d7ca1f"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-e66931d7">Interested In A Coporate or Private Event?</span></h2><p data-pf-type="Paragraph2" class="sc-pkvvt cbrLgP pf-8648bfba"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-b5348648">Contact Us To Set One Up</span></p><div class="sc-qPjXN eYzxUD pf-d9f7b828 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:15px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-0a1e0396" data-pf-type="Column"><div data-pf-type="Form2" class="sc-qQAox csiTZj pf-5f3983e2">{% form 'contact' %}<div class="sc-qPjXN eYzxUD pf-0a1dc426 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:10px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-a0681c71" data-pf-type="Column"><div data-pf-type="Form2.Field" class="sc-qQKBW iRZdgm pf-2df6933d"><label class="sc-prqHV gLlDTH">First Name<sup>*</sup></label><input name="contact[First Name]" type="text" placeholder="Enter your first name" required="" data-drag-disable="true" class="sc-pJhSf gdVGCp" value=""></div></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-1c714985" data-pf-type="Column"><div data-pf-type="Form2.Field" class="sc-qQKBW iRZdgm pf-933d8f42"><label class="sc-prqHV gLlDTH">Last Name</label><input name="contact[Last Name]" type="text" placeholder="Enter your last name" data-drag-disable="true" class="sc-pJhSf gdVGCp" value=""></div></div></div></div><div class="sc-qPjXN eYzxUD pf-c4263587 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:10px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--12"><div class="sc-pkUyL fTyjzF pf-49850c81" data-pf-type="Column"><div data-pf-type="Form2.Field" class="sc-qQKBW iRZdgm pf-8f4235c7"><label class="sc-prqHV gLlDTH">Email<sup>*</sup></label><input name="contact[email]" type="email" placeholder="Enter Your Mail" required="" data-drag-disable="true" class="sc-pJhSf gdVGCp" value=""></div></div></div></div><div class="sc-qPjXN eYzxUD pf-3587e9b5 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:10px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--12"><div class="sc-pkUyL fTyjzF pf-0c81b7b8" data-pf-type="Column"><div data-pf-type="Form2.Field" class="sc-qQKBW iRZdgm pf-35c734ef"><label class="sc-prqHV gLlDTH">Message<sup>*</sup></label><textarea name="contact[Message]" required="" placeholder="Enter your message" rows="6" data-drag-disable="true" class="sc-pjuKs hxQaV"></textarea></div></div></div></div><div class="sc-qPjXN eYzxUD pf-b38e5f39 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:10px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--12"><div class="sc-pkUyL fTyjzF pf-e9b5b38e" data-pf-type="Column"><button type="submit" data-pf-type="Form2.Button" class="sc-pBlUC jBiRe pf-b7b80a1d"><i class="sc-pjGMk jrwOpx pf-34efa068 fa fa-envelope" data-pf-type="Icon"></i>Submit</button></div></div></div>{% for field in form.errors %}{% if field == 'form' %}<p class="sc-qYVps kEvrqM">Sorry, the submission can not be sent! Please try again later!</p>{{ form.errors.messages[field] }}{% endif %}{% if form.errors.messages[field] contains "can't be blank." %}<p class="sc-qYVps kEvrqM">Field can't be blank</p>{% else %}<p class="sc-qYVps kEvrqM">Sorry, the submission can not be sent! Please try again later!</p>{% endif %}{% endfor %}{% if form.posted_successfully? %}<p class="sc-qYVps hYCNmc">Thank you for your submissions!</p>{% endif %}{% endform %}</div></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-0396d9f7" data-pf-type="Column"><p data-pf-type="Paragraph2" class="sc-pkvvt cbrLgP pf-8b452df6"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-1dae8b45">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span></p></div></div></div></div></div></div></div></div></div></div></div><script>
+					window.__pagefly_setting__={"baseURL":"https://apps.pagefly.io","analyticsURL":"https://analytics.pagefly.io","isBackend":false,"cdnURL":"https://cdn.pagefly.io","pageflyVersion":"2.15.2","shopDomain":"chocorush.myshopify.com","elementData":{"pf-fbeac76e":{"listPosition":2,"limit":{"all":5,"laptop":5,"tablet":5,"mobile":5},"spacing":{"all":"10px","laptop":"10px","tablet":"10px","mobile":"10px"},"listLayout":1,"hoverAction":0,"onHover":0,"clickAction":0,"imageSource":"featured","_type":"ProductImage2"},"pf-f407fb54":{"applyCondition":false,"collectionSource":"all","collectionIds":[],"tags":"","_type":"ProductBadge"}},"pageTitle":"Page with product","pageType":"product","pageId":"1da4d966-d273-4b5f-a492-f823051bdce5","lazyLoad":false,"imageLazyLoad":false,"nativeImageLazyLoad":true,"trackingIDs":[],"shopifyProxyPath":"/a/pf_preview","updatedTime":"2020-12-28T16:57:38.487Z"};
+					window.__pagefly_setting__.moneyFormat = {{shop.money_format | json}}
+				</script><script src="https://cdn.pagefly.io/pagefly/2.15.2/core/helper.js?t=20201228171226" defer></script>

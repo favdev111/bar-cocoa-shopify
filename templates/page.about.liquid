@@ -1,0 +1,70 @@
+<section class="section-padding relative bg-green hero-about-1">
+  <div class="background">
+    <img src="{{ 'hero3.jpg' | asset_img_url: '1920x' }}" class="image-cover"></img>
+  </div>
+  <div class="container relative z-10">
+    <h1 class="text-4xl font-bold">Our Mission Is Simple</h1>
+    <h2 class="text-2xl mb-6">Create Happiness One Piece of Chocolate at a Time</h2>
+    <a href="/pages/chocolate-club" class="button-alt-outline mb-0">Join The Club</a>
+  </div>
+</section>
+<section class="section-padding bg-dark">
+  <div class="container flex items-center md:flex-wrap md:justify-center">
+    <div class="w-1/2 md:w-auto md:mb-6">
+      <h2 class="text-light element-underline-light mb-12 font-fancy max-w-300">Quality Begins With Ethics</h2>
+      <p class="text-light max-w-600">Ethics is a key ingredient to the world’s best chocolate. Bar & Cocoa’s selection supports a supply chain that is not only more transparent than fair trade or big-brand chocolate but also tastier! The makers we feature source their cacao through direct trade. Therefore, local cacao farmers are paid better and makers can nurture higher standards for premium quality cacao and sustainable agroforestry.</p>
+    </div>
+    <div class="w-1/2 flex justify-center flex-wrap md:w-full">
+      <img src="{{ 'choco-stock-2.jpeg' | asset_img_url: '400x' }}" class="mx-3 mb-6 md:max-h-300"></img>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-gray section-shadow">
+  <div class="container-small flex items-center justify-between flex-wrap sm:justify-center">
+    <div class="w-1/2 flex justify-center pr-4 sm:pr-0 sm:w-auto sm:mb-6">
+      <div class="w-350 h-600">
+        <img src="{{ 'choco-stock-1.jpeg' | asset_img_url: 'x600' }}" class="image-cover"></img>
+      </div>
+    </div>
+    <div class="w-1/2 pl-6 sm:w-auto sm:pl-0">
+      <h2 class="text-4xl element-underline mb-12 font-medium sm:text-center">Taste the Difference.<br/>Discover Real Chocolate.</h2>
+      <p class="mb-4 max-w-350">At Bar & Cocoa, we meticulously select our chocolate offerings. Each product we offer is crafted from fine quality cacao, making cocoa — not sugar or filler — the star ingredient. You can taste the uniqueness and complexity of different cacao origins with nuanced flavors, unlike mass-produced chocolate.</p>
+      <p class="max-w-400">This is an elevated experience that meets our exacting standards. <strong>Eat Real Chocolate</strong>. It’s better for you, the environment and it tastes <i>really</i> good.</p>
+    </div>
+  </div>
+</section>
+<section class="section-padding about-us">
+  <div class="container-small flex items-center justify-between flex-wrap sm:justify-center">
+    <div class="w-1/2 sm:w-auto sm:mb-6">
+      <div class="max-w-500">
+        <h2 class="font-fancy mb-8">About Us</h2>
+        <p class="mb-4">Once you’ve tasted real chocolate, the other stuff just won’t do. So we made sure everyone could taste the difference.</p>
+        <p class="mb-4">
+          In 2015, we set out to make <strong>bean to bar chocolate</strong> easily accessible with a craft chocolate subscription service. After some success, we moved into e-commerce and retail to create one of the world’s largest selections of bean to bar chocolate. We’ve dedicated our energy to supporting ethical business practices that offer local chocolate makers a more sustainable business model that doesn’t exploit their services and talent. You really can taste the difference of ethically sourced chocolate.
+        </p>
+        <p class="mb-8">
+          <strong>Bar & Cocoa</strong> is proud to house over 70+ chocolate makers from 40+ countries and we are constantly adding new chocolate makers as the craft chocolate scene grows. We’re a small but mighty team here in Denver, CO hand-packing each order with care to preserve the quality of these exquisite chocolates as they ship to your front door.
+        </p>
+        <div class="w-full sm:text-center">
+          <a href="/pages/chocolate-makers" class="button-alt-outline" role="button">View Our Makers</a>
+        </div>
+      </div>
+    </div>
+    <div class="w-1/2 max-w-400 xl:w-2/5 flex flex-wrap flex-col justify-center sm:flex-row sm:w-full">
+      <img src="{{ 'choco-01.jpg' | asset_img_url: '400x' }}" class="max-h-300 mb-6 self-start md:self-center sm:mx-3"></img>
+      <img src="{{ 'choco-03.jpg' | asset_img_url: '400x' }}" class="max-h-300 self-end md:self-center sm:self-start sm:mx-3"></img>
+    </div>
+  </div>
+</section>
+<section class="hero-about-2">
+  <div class="overlay"></div>
+  <img src="{{ 'hero3.jpg' | asset_img_url: '1920x' }}"></img>
+</section>
+<section class="section-padding">
+    <div class="container-small">
+        <h2 class="text-center text-4xl mb-6">Explore Our Chocolate</h2>
+        {% assign handle = 'homepage-featured' %}
+        {% assign slider_container_class = "slider-container-" | append: handle %}
+        {% include 'product-slider' with collection: collections[handle], slider_container_class: slider_container_class %}
+    </div>
+</section>

@@ -1,0 +1,84 @@
+<section class="section-padding-large relative min-h-400">
+  <div class="background">
+    <div class="overlay bg-dark opacity-50"></div>
+    <img src="{{ 'hero-6.jpg' | asset_img_url: 'master' }}" class="image-cover" alt="The Best Chocolate In The World Brought To You"></img>
+  </div>
+  <div class="container relative z-10 text-light">
+    <div class="sm:flex sm:flex-col sm:justify-center">
+      <h1 class="text-center text-4xl sm:text-3xl"><strong>The Best Chocolate</strong><br/>
+      In The World Brought To You</h1>
+      <a href="/pages/chocolate-club" class="button-outline sm:self-center max-w-200" style="display:block;margin:auto;">Join The Club</a>
+    </div>
+  </div>
+</section>
+<section class="section-padding-large bg-dark">
+  <div class="container flex justify-between flex-wrap">
+    <div class="w-3/5 sm:w-full sm:flex sm:flex-col sm:items-center">
+      <div class="flex justify-between mb-6">
+        <div class="max-w-600 mb-6 sm:mb-0">
+          <div class="mb-12">
+            <h2 class="element-underline-light mb-12 text-light font-fancy inline">Award Winning Chocolate Makers</h2>
+          </div>
+          <p class="text-light">Bar & Cocoa is the premier purveyor of exceptional, ethically sourced, craft chocolates. We offer a diverse selection of bean to bar chocolate from over 40 countries by more than 70 fine chocolate makers.</p>
+        </div>
+        
+      </div>
+      
+      <div class="max-w-600 sm:hidden">
+        <form class="nav-search w-full sm:mb-12 bc-sf-search-form" action="/search" method="get" role="search">
+          <p><img src="{{ 'Search.svg' | asset_url}}" alt="Explore Our Chocolate"/></p>
+          <input id="index-search-form-query" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Explore Our Chocolate" class="bc-sf-search-box"></input>
+          <div class="search-underline"></div>
+          <button type="submit" class="nav-search-submit"><img src="{{ 'Arrow.svg' | asset_url}}" alt="Explore Our Chocolate"/></button>
+        </form>
+      </div>
+      <div class="hidden sm:block">
+        <form class="nav-search w-full sm:mb-12 bc-sf-search-form" action="/search" method="get" role="search">
+          <input id="index-search-form-query" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Explore Our Chocolate" class="bc-sf-search-box special-search-button"></input>
+        </form>
+      </div>
+    </div>
+    <div class="w-2/5 sm:w-full sm:flex sm:flex-col sm:items-center">
+      <div class="mb-6">
+        <a href="https://barandcocoa.com/products/virtual-chocolate-tasting-experience">
+        <img src="{{ '2021_virtual_tasting_promo.jpg' | asset_img_url: '400x'}}" class="image-cover max-w-400" alt="Explore Our Chocolate"></img></a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-padding-small bg-gray section-shadow">
+  <div class="container-small">
+    <h2 class="text-center text-4xl mb-12">New Arrivals</h2>
+    {% assign handle = 'new-arrivals' %}
+    {% assign slider_container_class = "slider-container-" | append: handle %}
+    {% include 'product-slider' with collection: collections[handle], slider_container_class: slider_container_class %}
+  </div>
+</section>
+<section class="section-padding">
+  <div class="container-small flex items-center justify-between flex-wrap sm:flex-col sm:justify-center">
+    <div class="w-1/2 sm:w-auto sm:mb-6">
+      <img src="{{ 'choco-stock-4.jpg' | asset_img_url: 'x600'}}" class="max-h-600" alt="Give The Gift Of Chocolate"></img>
+    </div>
+    <div class="w-1/2 pl-6 sm:pl-0 sm:w-auto">
+      <h2 class="text-4xl max-w-250 element-underline mb-12">Give The Gift Of Chocolate</h2>
+      <p class="mb-12 max-w-400">Leave a lasting impression with our signature chocolate gift box. Each box is loaded with your pick of 8 or 10 bars of Milk, Dark, or “anything goes” chocolate bars. We’ve curated these gift boxes to feature a range of cacao origins and makers that will take you on a chocolate tasting journey to remember. This is the gift that will keep on giving.</p>
+      <a href="/pages/gifts" class="button-alt-outline">Purchase A Chocolate Gift</a>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-green">
+  <div class="container">
+    <div class="flex justify-between sustainable-icons max-w-500 mx-auto mb-6">
+      <img src="{{ 'Sustainable.svg' | asset_url}}" class="px-4" alt="Sustainable"></img>
+      <img src="{{ 'Ethical.svg' | asset_url}}" class="px-4" alt="Ethical"></img>
+      <img src="{{ 'Exceptional.svg' | asset_url}}" class="px-4" alt="Exceptional"></img>
+    </div>
+    <h2 class="text-center text-4xl mb-6 text-bold">Sustainable. Ethical. Exceptional</h2>
+    <p class="max-w-600 mx-auto text-center md:max-w-400">Food is an experience; it punctuates our daily lives and often defines our favorite memories. By curating chocolate makers who focus on fine cacao and quality ingredients, we aim to elevate your experience with chocolate. Plus, your purchase from Bar & Cocoa supports sustainable farming, ethical trade, and the production of the world’s best chocolate.</p>
+  </div>
+</section>
+<section class="section-padding bg-gray">
+  <div class="container-small">
+    {% include 'tabbed-product-slider' %}
+  </div>
+</section>

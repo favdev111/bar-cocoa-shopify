@@ -1,0 +1,95 @@
+<div 
+  id="notification-container" 
+  class="
+    fixed right-0 top-notification giftbox-extra-breakpoint:top-notification-mobile
+    flex flex-col items-end
+  "
+>
+  <div class="hidden {% comment %}because css-processor-include-these-css-classes{% endcomment %} top-notification-scrolling"></div>
+  <div id="notification-template" class="hidden px-4 py-2 mr-2 mb-2 text-yellow rounded-md shadow-lg text-sm" style="min-height: 36px; background-color: #211F1E;"></div>
+</div>
+
+
+<style>
+  #notification-container {
+    transition-property: margin,margin-top,margin-bottom,margin-left,margin-right;
+    transition-duration: 500ms;
+  }
+  #notification-container.scrolling {
+    margin-top: -50px;
+  }
+  @media only screen and (min-width: 910px) {
+    #notification-container.scrolling {
+      margin-top: -126px;
+    }
+  }
+</style>
+<script>
+  $(document).ready(() => {
+    const DEFAULT_MESSAGE_DURATION = 3000; //ms
+    const $notificationTemplate = $('#notification-template'),
+          $notificationContainer = $('#notification-container');
+
+    const state = {
+      current: [],
+      counter: 0
+    }
+
+    const messageType = {
+      'ERROR': (message) => {},
+      'LOADING': (message) => {},
+      'SUCCESS': (message) => {},
+      'ATTENTION': (message) => {}
+    }
+
+    const setMessage = (message_type, message, duration = DEFAULT_MESSAGE_DURATION) => {
+      console.log("message dispatcher: ", message_type, message, duration)
+
+      const newCount = state.counter + 1
+      const $messageElement = $notificationTemplate.clone().removeClass('hidden').html(message)
+
+      state.current = [ ...state.current, { id: state.counter, message: $messageElement } ];
+      state.counter = newCount;
+
+      $notificationContainer.append($messageElement)
+      setTimeout(() => {
+        $messageElement.fadeOut()
+        setTimeout(() => {
+          $messageElement.remove()
+        }, 450)
+        state.current = state.current.filter(x => x.id !== newCount)
+      }, duration)
+    }
+
+    const messageSystem = {
+      dispatch: (message_type, message, duration) => setMessage(message_type, message, duration)
+    }
+
+    window.messageSystem = messageSystem;
+  })
+</script>
+<script>
+    const $notificationContainer = $('#notification-container');
+
+    const adjustNotificationPosition = timer(() => {
+      if ($(window).scrollTop() > 100) {
+        $notificationContainer.addClass("scrolling");
+      } else {
+        $notificationContainer.removeClass("scrolling");
+      }
+    }, 250)
+
+    $(window).scroll(adjustNotificationPosition);
+    
+    function timer(func,wait){
+      var timeout = null;
+      return function(){
+        if(timeout !== null){return;}
+        var context = this, args = arguments;
+        timeout = setTimeout(function(){
+          timeout = null;
+          func.apply(context,args);
+        },wait)
+      }
+    }
+</script>

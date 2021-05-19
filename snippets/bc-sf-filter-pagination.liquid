@@ -1,0 +1,49 @@
+<ul>
+  {% if paginate.previous %}
+    <li>
+      <a href="{{ paginate.previous.url }}" class="backward">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        	 viewBox="0 0 20 20" xml:space="preserve">
+        	<path class="st0" d="M10,20l1.8-1.8l-7-7H20V8.8H4.8l7-7L10,0L0,10L10,20z" fill="#ED6832"/>
+        </svg>
+      </a>
+    </li>
+  {% else %}
+    <li class="disabled backward">
+      <span>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        	 viewBox="0 0 20 20" xml:space="preserve">
+        	<path class="st0" d="M10,20l1.8-1.8l-7-7H20V8.8H4.8l7-7L10,0L0,10L10,20z" fill="#ED6832"/>
+        </svg>
+      </span>
+    </li>
+  {% endif %}
+
+  {% for part in paginate.parts %}
+    {% if part.is_link %}
+      <li><a href="{{ part.url }}">{{ part.title }}</a></li>
+    {% elsif part.title == '&hellip;' %}
+      <li><span>...</span></li>
+    {% else %}
+      <li><span class="active">{{ part.title }}</span></li>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginate.next %}
+    <li>
+      <a href="{{ paginate.next.url }}" class="forward">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <path d="M30,18l-2.115-2.115L19.5,24.255V6h-3V24.255L8.13,15.87,6,18,18,30Z" transform="translate(-6 30) rotate(-90)" fill="#ed6832"/>
+        </svg>
+      </a>
+    </li>
+  {% else %}
+    <li class="disabled forward">
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+          <path d="M30,18l-2.115-2.115L19.5,24.255V6h-3V24.255L8.13,15.87,6,18,18,30Z" transform="translate(-6 30) rotate(-90)" fill="#ed6832"/>
+        </svg>
+      </span>
+    </li>
+  {% endif %}
+</ul>

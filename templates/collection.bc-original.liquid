@@ -1,0 +1,20 @@
+{% comment %}
+{% include 'shogun-products', content: collection %}
+{{collection.metafields.shogun.above}}
+{% endcomment %}
+{% comment %}
+  The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+
+{% section 'collection-template' %}
+
+{% comment %}
+{{collection.metafields.shogun.below}}
+{% endcomment %}
+{% comment %}
+<div class="grid gap-24 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+  {% for product in collection.products %}
+    {% include 'product-card' %}
+  {% endfor %}
+</div>
+{% endcomment %}

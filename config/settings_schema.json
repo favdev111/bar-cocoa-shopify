@@ -1,0 +1,129 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Themekit template theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https:\/\/github.com\/Shopify\/themekit",
+    "theme_support_url": "https:\/\/github.com\/Shopify\/themekit\/issues"
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting]({{ site.url }}\/manual\/using-themes\/change-the-layout\/help-script-find-money-formats)."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_multiple_currencies",
+        "label": "Enable currency conversion",
+        "default": true,
+        "info": "Even though prices are displayed in different currencies, orders will still be processed in your store's currency."
+      },
+      {
+        "type": "select",
+        "id": "currency_format",
+        "label": "Format",
+        "options": [
+          {
+            "value": "money_format",
+            "label": "Without currency ($10.00)"
+          },
+          {
+            "value": "money_with_currency_format",
+            "label": "With currency ($10.00 USD)"
+          }
+        ],
+        "default": "money_with_currency_format"
+      },
+      {
+        "type": "text",
+        "id": "supported_currencies",
+        "label": "Supported currencies",
+        "default": "INR GBP CAD USD AUD EUR JPY",
+        "info": "Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
+      }
+    ]
+  },
+  {
+    "name": "App: Flits",
+    "icon": "color",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Order tracking colors"
+      },
+      {
+        "type": "color",
+        "id": "flits_tracking_active_color",
+        "label": "Processing Status",
+        "default": "#1201FE"
+      },
+      {
+        "type": "color",
+        "id": "flits_tracking_completed_color",
+        "label": "Completed Status",
+        "default": "#2D8700"
+      },
+      {
+        "type": "color",
+        "id": "flits_tracking_remain_color",
+        "label": "Remaining Status",
+        "default": "#dddddd"
+      },
+      {
+        "type": "color",
+        "id": "flits_outer_circle_background_color",
+        "label": "Outer circle background color",
+        "default": "#ebf0f2"
+      },
+      {
+        "type": "color",
+        "id": "flits_check_mark_color",
+        "label": "Check mark color",
+        "default": "#ebf0f2"
+      },
+      {
+        "type": "header",
+        "content": "Button colors"
+      },
+      {
+        "type": "color",
+        "id": "flits_primary_button_color",
+        "label": "Primary button color",
+        "default": "#4C5667"
+      },
+      {
+        "type": "color",
+        "id": "flits_primary_button_background_color",
+        "label": "Primary button background color",
+        "default": "#EBEFF2"
+      },
+      {
+        "type": "color",
+        "id": "flits_default_button_color",
+        "label": "Secondary button color",
+        "default": "#5FBEAA"
+      },
+      {
+        "type": "color",
+        "id": "flits_default_button_background_color",
+        "label": "Secondary button background color",
+        "default": "#EBEFF2"
+      },
+      {
+        "type": "color",
+        "id": "flits_danger_button_color",
+        "label": "Danger button color",
+        "default": "#D9534F"
+      },
+      {
+        "type": "color",
+        "id": "flits_danger_button_background_color",
+        "label": "Danger button background color",
+        "default": "#EBEFF2"
+      }
+    ]
+  }
+]

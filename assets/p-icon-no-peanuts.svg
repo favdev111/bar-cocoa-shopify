@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <g id="Group_359" data-name="Group 359" transform="translate(-468 -108)">
+    <g id="Group_350" data-name="Group 350" transform="translate(246)">
+      <g id="Group_254" data-name="Group 254" transform="translate(4751 -1547) rotate(90)">
+        <g id="Ellipse_4" data-name="Ellipse 4" transform="translate(1655 4485)" fill="none" stroke="#211f1e" stroke-width="1">
+          <circle cx="22" cy="22" r="22" stroke="none"/>
+          <circle cx="22" cy="22" r="21.5" fill="none"/>
+        </g>
+      </g>
+      <g id="Group_257" data-name="Group 257" transform="translate(71.014 11)">
+        <path id="Path_215" data-name="Path 215" d="M3563.7,7031.147c-1.229.894-2.406,3.551-.6,6.433s4.265,2.855,5.415,4.147,1.99,5.53,5.989,5.559,4.236-1.467,4.236-1.467.494-5.3-1.869-6.772-3.7-.788-4.529-1.828-.89-4.381-2.7-5.493S3564.931,7030.254,3563.7,7031.147Z" transform="translate(-3399.189 -6919.033)" fill="none" stroke="#211f1e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Path_216" data-name="Path 216" d="M3695.3,7079.935c2.374,2.263.75,3.463,2.418,5.623s2.876,1.878,5.021,2.243" transform="translate(-3526.573 -6966.197)" fill="none" stroke="#211f1e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Path_217" data-name="Path 217" d="M3754.818,7017.305a4.059,4.059,0,0,1,3.01-2.412,5.907,5.907,0,0,1,4.4.862,1.514,1.514,0,0,1,.719,2.115" transform="translate(-3583.405 -6903.923)" fill="none" stroke="#211f1e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Path_218" data-name="Path 218" d="M3819.89,7088.839s-1.569-3.258-3.763-3.375a4.364,4.364,0,0,0-4.35,2.046,1.971,1.971,0,0,0,.166,2.734" transform="translate(-3637.889 -6971.475)" fill="none" stroke="#211f1e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <path id="Path_219" data-name="Path 219" d="M3929.207,7206.4a3.918,3.918,0,0,1-3.319,1.837" transform="translate(-3747.207 -7087.206)" fill="none" stroke="#211f1e" stroke-linecap="round" stroke-width="1"/>
+      </g>
+    </g>
+    <line id="Line_121" data-name="Line 121" x1="31" y2="31" transform="translate(474.5 114.5)" fill="none" stroke="#1f1d1c" stroke-width="1"/>
+    <line id="Line_130" data-name="Line 130" x2="31" y2="31" transform="translate(474.5 114.5)" fill="none" stroke="#1f1d1c" stroke-width="1"/>
+  </g>
+</svg>

@@ -1,0 +1,80 @@
+<section class="section-padding">
+  <div class="container">
+    {% if shop.customer_accounts_enabled %}
+      {% if customer  %}
+        <script>
+          window.location.replace( '/account' );
+        </script>
+      {% else %}
+        <div class="account-login-block text-center p-4">
+          <h1 class="font-medium mb-6">Login</h1>
+          <h4 class="font-medium text-xl">Please choose Store or Subscription to Login</h4>
+          <div class="text-center p-4">
+          <button class="button-alt self-center max-w-200 w-full mb-6 store-login-button">Store</button>
+          <a class="button-alt self-center max-w-200 w-full mb-6 club-login-button" href="http://club.barandcocoa.com/customer/login">Subscription</a>
+          </div>
+        </div>
+        <div class="login-block" style="display:none;">
+          <div class="text-center p-4">
+            <h1 class="font-medium mb-6">Customer Login</h1>
+            <h4 class="font-medium text-xl">For Store Order</h4>
+          </div>
+          {% form 'customer_login' %} {{ form.errors | default_errors }}
+              <label for"customer_email">Email</label>
+              <input class="login-input w-full" type="email" name="customer[email]" required/>
+              <div class="flex justify-between">
+                <label for"customer_password">password</label>
+                <a class="text-link-orange-underline forgot-pass-button">Forgot Your Password?</a>
+              </div>
+              <input class="login-input w-full" type="password" name="customer[password]" required/>
+              <button class="button-alt self-center max-w-200 w-full mb-6" type="sumbit">Login</button>
+              <div class="self-center">
+                <p class="inline-block mr-2">New Customer?</p><a href="/account/register" class='text-link-orange-underline inline-block '>Sign Up</a>
+              </div>
+              <a class="text-link-orange account-login-back-button self-center">Go Back</a>
+          {% endform %}
+        </div>
+        <div class="forgot-password-block">
+          <div class="text-center p-4">
+            <h1 class="font-medium mb-6">Forgot Your Password?</h1>
+            <h4 class="font-medium text-xl">Reset It Below</h4>
+          </div>
+          {% form 'recover_customer_password', id: "recover_customer_password" %} {{ form.errors | default_errors }}
+            <label for"customer_email">Email</label>
+            <input class="login-input w-full" type="email" name="email" required/>
+            <button class="button-alt self-center max-w-200 w-full mb-6" type="sumbit">Reset</button>
+            <a class="text-link-orange reset-back-button self-center">Go Back</a>
+          {% endform %}
+        </div>
+        <div class="subscription-block" style="display:none;">
+        <div class="text-center mb-6">
+          <h4 class="font-medium text-xl">Having issues managing your subscription?</h4>
+          <a href="http://club.barandcocoa.com/customer/login" class="text-link-orange-underline">Click here</a>
+        </div>
+        <div class="text-center">
+          <h4 class="font-medium text-xl">Chocolate Club Members</h4>
+          <a href="http://club.barandcocoa.com/customer/login" class="text-link-orange-underline">Login here</a>
+        </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+  <script>
+    $(".store-login-button").click(function(){
+      $(".login-block").css("display","block");
+      $(".account-login-block").css("display","none");
+    });
+    $(".forgot-pass-button").click(function(){
+      $(".forgot-password-block").css("display","block");
+      $(".login-block").css("display","none");
+    });
+    $(".reset-back-button").click(function(){
+      $(".login-block").css("display","block");
+      $(".forgot-password-block").css("display","none");
+    });
+    $(".account-login-back-button").click(function(){
+      $(".account-login-block").css("display","block");
+      $(".login-block").css("display","none");
+    });
+  </script>
+</section>

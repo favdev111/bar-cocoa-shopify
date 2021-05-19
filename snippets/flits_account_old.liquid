@@ -1,0 +1,90 @@
+{% comment %}
+    Build Country & Province selectors using the theme-addresses.js package
+{% endcomment %}
+<script src="{{ 'theme-addresses.min.js' | asset_url }}"></script>
+<script>
+    theme.allCountryOptionTags = {{ all_country_option_tags | json }};
+    const countryProvinceSelector = window.Shopify.theme.addresses.CountryProvinceSelector(
+      window.theme.allCountryOptionTags
+    );
+</script>
+{% unless customer  %}
+  <script>
+    window.location.replace( '/login' );
+  </script>
+{% endunless %}
+
+<section class="section-padding bg-gray relative">
+  <div class="account-extra-color"></div>
+  <div class="container mb-8 relative z-10">
+    <h1 class="text-4xl font-medium">Hi {{ customer.first_name }}. Welcome Back!</h1>
+    <a class='text-link-orange-underline' href="account/logout">Logout</a>
+  </div>
+  <div class="container flex relative z-10 xl:flex-col">
+    {% comment %}
+      Tabs, to be used in phase 2
+    {% endcomment %}
+    <div class="account-tabs">
+      <a class="selected">My Purchases</a>
+      {% comment %}
+        <a>Tab 2</a>
+        <a>Tab 3</a>
+      {% endcomment %}
+    </div>
+    <div class="account-main bg-white">
+      <div class="account-info">
+        <p class="account-title">Information</p>
+        {% if customer.default_address %}
+        <ul>
+          <li>
+            <p>Name</p><p>{{ customer.default_address.first_name }} {{ customer.default_address.last_name }}</p>
+          </li>
+          <li>
+            <p>Email</p><p>{{customer.email}}</p>
+          </li>
+          <li>
+            <p>Phone</p><p>{{customer.default_address.phone}}</p>
+          </li>
+          <li>
+            <p>Address</p><p>{{ customer.default_address.street }}, {{ customer.default_address.city}}, {{customer.default_address.province}}, {{ customer.default_address.country }}, {{ customer.default_address.zip }}</p>
+          </li>
+        </ul>
+        <a class="button-alt-outline" href="./account/addresses">Go To Addresses</a>
+        {% endif %}
+        {% if customer.addresses.size < 1 %}
+          <a class="button-alt" onclick="$('.account-lightbox').addClass('open')">Add An Address</a>
+        {% endif %}
+      </div>
+      <div class="account-purchases">
+        <p class="account-title">My Purchases</p>
+        {% if customer.orders.size != 0 %}
+        <ul class="scrollbar-style-1">
+          <li class="purchase-header">
+            <p class="purchase-col-num">Order Number</p>
+            <p class="purchase-col-date">Date of order</p>
+            <p class="purchase-col-amt">Amount</p>
+            <p class="purchase-col-status">Status</p>
+          </li>
+          {% for order in customer.orders %}
+          <li>
+            <p class="purchase-col-num">{{ order.order_number }}</p>
+            <p class="purchase-col-date">{{ order.created_at | date: "%a, %b %d, %Y" }}</p>
+            <p class="purchase-col-amt">{{ order.line_items_subtotal_price | money }}</p>
+            <p class="purchase-col-status">{{ order.fulfillment_status }}</p>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <p>You haven't placed any orders yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% include 'add-account' %}
+
+{% comment %}
+  TODO
+   - left align customer information
+
+{% endcomment %}

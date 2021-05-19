@@ -1,0 +1,144 @@
+
+
+{% assign handle1 = 'homepage-featured' %}
+{% assign slider_container_class1 = "slider-container-" | append: handle1 %}
+
+{% assign handle2 = 'our-best-sellers-ultra-dark' %}
+{% assign slider_container_class2 = "slider-container-" | append: handle2 %}
+
+{% assign handle3 = 'our-best-sellers-inclusions' %}
+{% assign slider_container_class3 = "slider-container-" | append: handle3 %}
+
+<h2 class="text-center text-2xl mb-12">Our Recommendations</h2>
+<div class="flex flex-col">
+    <div class="flex justify-center mb-12 md:flex-col md:items-center">
+        <a role="button" id="{{ handle1 }}-slider-tab" class="button-alt-outline-selected w-full md:max-w-300 md:mb-4">Explore Our Best Sellers</a>
+        <a role="button" id="{{ handle2 }}-slider-tab" class="button-alt-outline mx-6 w-full md:max-w-300 md:mx-0 md:mb-4">For Ultra Dark Lovers</a>
+        <a role="button" id="{{ handle3 }}-slider-tab" class="button-alt-outline w-full md:max-w-300">Interesting Inclusions</a>
+    </div>
+
+    <div id="{{ handle1 }}-slider" class="">
+        {% include 'product-slider' with collection: collections[handle1], tabbed: true, slider_container_class: slider_container_class1 %}
+    </div>
+
+    <div id="{{ handle2 }}-slider" class="hidden">
+        {% include 'product-slider' with collection: collections[handle2], tabbed: true, slider_container_class: slider_container_class2 %}
+    </div>
+
+    <div id="{{ handle3 }}-slider" class="hidden">
+        {% include 'product-slider' with collection: collections[handle3], tabbed: true, slider_container_class: slider_container_class3 %}
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            const addButtonClass = (el, addedClass) => {
+                const prevClasses = el.className
+                if (!prevClasses.includes(addedClass)) {
+                    el.className = addedClass+" "+prevClasses
+                }
+            }
+            const removeButtonClass = (el, removedClass) => {
+                $(el).removeClass(removedClass)
+            }
+            const Sliders = {
+                bestSellers: null,
+                darkLovers: null,
+                inclusions: null
+
+            }
+            const sliderMountStates = {
+                bestSellers: true,
+                darkLovers: false,
+                inclusions: false
+
+            }
+            const sliderContainerSelectors = {
+                bestSellers: '.{{ slider_container_class1 }}',
+                darkLovers: '.{{ slider_container_class2 }}',
+                inclusions: '.{{ slider_container_class3 }}'
+            }
+            const sliderContainers = {
+                bestSellers: $('.{{ slider_container_class1 }}'),
+                darkLovers: $('.{{ slider_container_class2 }}'),
+                inclusions: $('.{{ slider_container_class3 }}')
+            }
+            const sliderWrappers = {
+                bestSellers: $('#{{ handle1 }}-slider'),
+                darkLovers: $('#{{ handle2 }}-slider'),
+                inclusions: $('#{{ handle3 }}-slider')
+            }
+            const sliderTabs = {
+                bestSellers: $('#{{ handle1 }}-slider-tab'),
+                darkLovers: $('#{{ handle2 }}-slider-tab'),
+                inclusions: $('#{{ handle3 }}-slider-tab')
+            }
+
+            const sliderKeys = Object.keys(Sliders);
+
+            sliderKeys.forEach((k, i) => {
+                const $sliderContainer = sliderContainers[k]
+                const SCREENS = {
+                    0: 325,
+                    650: 600,
+                    950: 900,
+                    1200: 1200
+                }
+
+                function onResize() {
+                    const curW = window.innerWidth;
+                    const sliderWidth = Object.keys(SCREENS).reduce((acc, x) => (curW > x) ? SCREENS[x] : acc , SCREENS[0]);
+                    $sliderContainer.css('max-width', sliderWidth)
+                }
+
+                $(window).resize(_ => {
+                    onResize()
+                    console.log($sliderContainer.css('max-width'))
+                })
+
+                onResize()
+
+                const mountSlider = (key) => {
+                    const Slider = new Glide(sliderContainerSelectors[key], {
+                        type: 'carousel',
+                        perView: 4,
+                        breakpoints: {
+                            1200: {
+                                perView: 3
+                            },
+                            950: {
+                                perView: 2
+                            },
+                            650: {
+                                perView: 1
+                            }
+                        }
+                    });
+
+                    Sliders[key] = Slider
+
+                    Sliders[key].mount()
+                }
+                mountSlider(k)
+
+                sliderTabs[k].on('click', () => {
+
+                    sliderKeys.forEach(j => {
+                        sliderWrappers[j].addClass('hidden')
+                        removeButtonClass(sliderTabs[j][0], 'button-alt-outline-selected')
+                        addButtonClass(sliderTabs[j][0], 'button-alt-outline')
+                        if (Sliders[j]) {
+                            Sliders[j].destroy()
+                            Sliders[j] = null;
+                        }
+                    })
+
+                    sliderWrappers[k].removeClass('hidden')
+                    removeButtonClass(sliderTabs[k][0], 'button-alt-outline')
+                    addButtonClass(sliderTabs[k][0], 'button-alt-outline-selected')
+
+                    mountSlider(k)
+                })
+            })
+        })
+    </script>
+</div>

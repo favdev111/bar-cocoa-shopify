@@ -1,0 +1,72 @@
+<div class="account-lightbox">
+  <section class="p-12 sm:p-6 bg-white relative account-lightbox-section flex flex-col">
+    <a class="account-lightbox-close">
+      X
+    </a>
+    <script>
+      $(".account-lightbox-close").click(function(){
+        $(".account-lightbox").removeClass('open');
+      });
+    </script>
+    <h4 class="mb-6">Add A New Address</h4>
+    <div class="new-account-form scrollbar-style-1 pr-2">
+      {% form 'customer_address', customer.new_address, class:'max-w-400 flex flex-col' %}
+        <div class="flex flex-col h-full">
+          <div class="flex justify-between">
+            <div class="mr-4 max-w-1/2">
+              <label for="AddressFirstName_{{ form.id }}">First Name *</label>
+              <input type="text" class="w-full" id="AddressFirstName_{{ form.id }}" name="address[first_name]" required>
+            </div>
+            <div class="ml-4 max-w-1/2">
+              <label for="AddressLastName_{{ form.id }}">Last Name *</label>
+              <input type="text" class="w-full" id="AddressLastName_{{ form.id }}" name="address[last_name]" required>
+            </div>
+          </div>
+          <label for="AddressPhone_{{ form.id }}">Phone *</label>
+          <input type="tel" id="AddressPhone_{{ form.id }}" name="address[phone]" required>
+
+          <label for="AddressCompany_{{ form.id }}">Company</label>
+          <input type="text" id="AddressCompany_{{ form.id }}" name="address[company]">
+
+          <label for="AddressAddress1_{{ form.id }}">Address 1 *</label>
+          <input type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" required>
+
+          <label for="AddressAddress2_{{ form.id }}">Address 2</label>
+          <input type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]">
+          <div class="flex justify-between sm:flex-wrap">
+            <div class="flex flex-col mr-4 w-1/2 pr-4">
+              <label for="AddressCountry_{{ form.id }}">Country *</label>
+              <select id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" required>{{ all_country_option_tags }}</select>
+            </div>
+            <div class="flex flex-col w-1/2 pl-4">
+              <label for="AddressProvince_{{ form.id }}">State / Province</label>
+              <input id="AddressProvince_{{ form.id }}" name="address[province]"></input>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <label for="AddressCity_{{ form.id }}">City *</label>
+            <input type="text" id="AddressCity_{{ form.id }}" name="address[city]">
+          </div>
+          <div class="flex flex-col">
+            <label for="AddressZip_{{ form.id }}">Postal code *</label>
+            <input type="text" id="AddressZip_{{ form.id }}" name="address[zip]" autocapitalize="characters">
+          </div>
+        </div>
+        <div class="flex items-center">
+          {{ form.set_as_default_checkbox }}
+          <label for="address_default_address_{{ form.id }}" class="ml-4">Set as address default</label>
+        </div>
+        <button class="button-alt mb-0" type="submit">Submit</a>
+        <script>
+            const countrySelector = document.querySelector('#AddressCountry_{{ form.id }}');
+            const provinceSelector = document.querySelector('#AddressProvince_{{ form.id }}');
+            const provinceWrapper = document.querySelector('#AddressProvinceContainer_{{ form.id }}');
+
+            countryProvinceSelector.build(countrySelector, provinceSelector, {
+                onCountryChange: (provinces) => provinceWrapper.classList.toggle(hideClass, !provinces.length),
+            });
+        </script>
+      {% endform %}
+    </div>
+  </section>
+</div>

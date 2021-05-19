@@ -1,0 +1,480 @@
+{% comment %}
+  TODO
+ - go to cart link on add product
+{% endcomment %}
+<style>
+  #atc-klaviyo-notification.button-alt.klaviyo-bis-trigger.show {
+    display: block !important;
+  }
+  #atc-klaviyo-notification.button-alt.klaviyo-bis-trigger.hide {
+    display: none !important;
+  }
+</style>
+
+<script>
+  window.productJSON = {{ product | json }};
+  window.cartJSON = {{ cart | json }};
+  window.tagArray = [];
+  window.productIconsDiet = {
+    "dairy1":{
+      img:"{{'p-icon-dairy.svg' | asset_url }}",
+      tooltip: "Contains dairy",
+      label:"Dairy"
+    },
+    "dairy2":{
+      img:"{{'p-icon-maybe-dairy.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes dairy",
+      label:"Trace Dairy"
+    },
+    "dairy3":{
+      img:"{{'p-icon-no-dairy.svg' | asset_url }}",
+      tooltip: "Dairy Free",
+      label:"Dairy Free"
+    },
+    "peanuts1":{
+      img:"{{'p-icon-peanuts.svg' | asset_url }}",
+      tooltip: "Contains peanuts",
+      label:"Peanuts"
+    },
+    "peanuts2":{
+      img:"{{'p-icon-maybe-peanuts.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes peanuts",
+      label:"Trace Peanuts"
+    },
+    "peanuts3":{
+      img:"{{'p-icon-no-peanuts.svg' | asset_url }}",
+      tooltip: "Peanut Free",
+      label:"Peanut Free"
+    },
+    "treenuts1":{
+      img:"{{'p-icon-treenuts.svg' | asset_url }}",
+      tooltip: "Contains treenuts",
+      label:"Treenuts"
+    },
+    "treenuts2":{
+      img:"{{'p-icon-maybe-treenuts.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes treenuts",
+      label:"Trace Treenut"
+    },
+    "treenuts3":{
+      img:"{{'p-icon-no-treenuts.svg' | asset_url }}",
+      tooltip: "Treenut Free",
+      label:"Treenut Free"
+    },
+    "soy1":{
+      img:"{{'p-icon-soy.svg' | asset_url }}",
+      tooltip: "Contains soy",
+      label:"Contains Soy"
+    },
+    "soy2":{
+      img:"{{'p-icon-maybe-soy.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes soy",
+      label:"Trace Soy"
+    },
+    "soy3":{
+      img:"{{'p-icon-no-soy.svg' | asset_url }}",
+      tooltip: "Soy Free",
+      label:"Soy Free"
+    },
+    "wheat1":{
+      img:"{{'p-icon-wheat.svg' | asset_url }}",
+      tooltip: "Contains Gluten",
+      label:"Contains Gluten"
+    },
+    "wheat2":{
+      img:"{{'p-icon-maybe-wheat.svg' | asset_url }}",
+      tooltip: "Manufactured in a facility which also processes wheat",
+      label:"Trace Gluten"
+    },
+    "wheat3":{
+      img:"{{'p-icon-no-wheat.svg' | asset_url }}",
+      tooltip: "Gluten Free",
+      label:"Gluten Free"
+    },
+    "vegan1":{
+      img:"{{'p-icon-vegan.svg' | asset_url }}",
+      tooltip: "Uses no animal products, but sweetened with non-organic refined sugar",
+      label:"Vegan"
+    },
+    "vegan2":{
+      img:"{{'p-icon-vegan.svg' | asset_url }}",
+      tooltip: "Organic refined sugar or alternative sweetener, and no animal products (ie defacto vegan)",
+      label:"Vegan+"
+    },
+    "vegan3":{
+      img:"{{'p-icon-vegan.svg' | asset_url }}",
+      tooltip: "Vegan-certified by vegan.org, which requires a $100 application fee per product",
+      label:"Vegan++"
+    },
+    "organic1":{
+      img:"{{'p-icon-organic.svg' | asset_url }}",
+      tooltip: "Organic Sugar",
+      label: "Organic",
+    },
+    "organic2":{
+      img:"{{'p-icon-organic.svg' | asset_url }}",
+      tooltip: "Organic Cacao",
+      label: "Organic+",
+    },
+    "organic3":{
+      img:"{{'p-icon-organic.svg' | asset_url }}",
+      tooltip: "Organic Cacao & Sugar",
+      label: "Organic++",
+    },
+    "organic4":{
+      img:"{{'p-cert-usda-organic.svg' | asset_url }}",
+      tooltip: "Organic-Certified Product (USDA/EU)",
+      label: "Organic",
+    }
+    };
+  window.productIconsValue = {
+    "farm1":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Bean to Bar",
+      label: "Bean to Bar",
+    },
+    "farm2":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Direct-Source Cacao",
+      label: "Direct Sourced",
+    },
+    "farm3":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Value-Added",
+      label: "Value-Added",
+    },
+    "farm4":{
+      img:"{{'p-icon-farm.svg' | asset_url }}",
+      tooltip: "Tree to Bar",
+      label: "Tree to Bar",
+    },
+    "wown":{
+      img:"{{'p-icon-wown.svg' | asset_url }}",
+      tooltip: "Woman Owned",
+      label: "Woman Owned",
+    },
+    "bipoc":{
+      img:"{{'p-icon-bipoc.svg' | asset_url }}",
+      tooltip: "BIPOC Owned",
+      label: "BIPOC Owned",
+    },
+    "fown":{
+      img:"{{'p-icon-fown.svg' | asset_url }}",
+      tooltip: "Family Owned",
+      label: "Family Owned",
+    }
+    };
+    window.productIconsCert = {
+    "cert-EU Organic":{
+      img:"{{'p-cert-eu-organic.png' | asset_img_url : 'master' }}",
+      tooltip: "Certified EU Organic",
+      label: "EU Organic",
+    },
+    "cert-Fair Trade":{
+      img:"{{'p-cert-fair-trade.png' | asset_img_url : 'master' }}",
+      tooltip: "Certified Fair Trade",
+      label: "Fair Trade",
+    },
+    "cert-Kosher Dairy":{
+      img:"{{'p-cert-kosher-dairy.svg' | asset_url }}",
+      tooltip: "Certified Kosher Dairy",
+      label: "Kosher Dairy",
+    },
+    "cert-USDA Organic":{
+      img:"{{'p-cert-usda-organic.svg' | asset_url }}",
+      tooltip: "Certified USDA Organic",
+      label: "USDA Organic",
+    },
+    "cert-Vegan":{
+      img:"{{'p-cert-vegan.svg' | asset_url }}",
+      tooltip: "Certified Vegan",
+      label: "Vegan",
+    },
+    "cert-Halal":{
+      img:"{{'p-cert-halal.svg' | asset_url }}",
+      tooltip: "Certified Halal",
+      label: "Halal",
+    },
+    "cert-Non-GMO Project":{
+      img:"{{'p-cert-non-gmo.svg' | asset_url }}",
+      tooltip: "Certified Non-GMO",
+      label: "Non-GMO",
+    },
+    "cert-cert-OU Kosher Parve":{
+      img:"{{'p-cert-pareve.svg' | asset_url }}",
+      tooltip: "Certified Pareve",
+      label: "Pareve",
+    },
+    "cert-Rainforest Alliance":{
+      img:"{{'p-cert-rainforest.svg' | asset_url }}",
+      tooltip: "Certified by the Rainforest Alliance",
+      label: "Rainforest Alliance",
+    }
+    };
+
+</script>
+
+{% for tag in product.tags %}
+  <script>
+    window.tagArray.push("{{tag}}");
+  </script>
+{% endfor %}
+<div class="hidden">
+  {% for variant in product.variants %}
+    {{variant.id}}
+  {% endfor %}
+</div>
+{% comment %}
+  The "judgeme-stars-loader" is selected in react and rendered in the React ProductHeader component
+{% endcomment %}
+<div id="judgeme-stars-loader" class="hidden">
+  {% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}
+</div>
+
+<section class="section-padding bg-gray product-single-card-section pre-populated">
+  <script>
+    window.productSinglePopulated = function(){
+      $(".product-single-card-section").removeClass("pre-populated");
+    }
+  </script>
+  <div class="container">
+    {% include 'react-product-header' with productId: product.id, productHandle: product.handle %}
+  </div>
+</section>
+<section class="bg-gray">
+  {% unless product.handle == "chocolate-gift-boxes" %}
+</section>
+<section class="section-padding-small text-center bg-green">
+  <p class="max-w-900 mx-auto bold mb-0 leading-6">Summer Shipping: Flat Rate $5.99 Shipping in the continental US above $90. Express and international shipping calculated at checkout.</p>
+</section>
+<section class="section-padding bg-backgroundGray product-info" id="rgn">
+  <div class="container info-section-container">
+    <div class="info-section" id="region">
+      <p class="pre-title">Cacao Region</p>
+      <a></a>
+      <p class="desc"></p>
+    </div>
+    <div class="info-section image" id="region-image">
+      <img src=""/>
+    </div>
+  </div>
+</section>
+<div id="estate-image" style="position: relative;overflow: hidden;">
+    <img src="" style="position: absolute;opacity: 0.15;object-fit: cover;width: 100%;height: 100%;">
+<section class="section-padding bg-backgroundGray product-info">
+  <div class="container info-section-container">
+    <div class="info-section" id="estate" style="position: relative;">
+      <p class="pre-title">Cacao Estate</p>
+      <a></a>
+      <p class="desc"></p>
+    </div>
+    <div class="info-section" id="strain" style="position: relative;">
+      <p class="pre-title">Cacao Strain</p>
+      <a></a>
+      <p  class="desc"></p>
+    </div>
+  </div>
+</section>
+</div>
+{% endunless %}
+{% if product.handle  == "virtual-chocolate-tasting-experience" %}
+  {% render "corporate-private-event" %}
+{% endif %}
+</section>
+<section class="section-padding bg-white">
+  <div class="container-small">
+    <h2 class="font-fancy text-center">Reviews</h2>
+    <div>
+      {% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-gray">
+  <div class="container">
+    <h2 class="text-center mb-12">You May Also Like</h2>
+    {% assign min = 0 %}
+    {% assign max = product.collections.length | minus: 1 %}
+    {% assign diff = max | minus: min %}
+    {% assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min %}
+    {% assign firstProductCollection = product.collections[randomNumber] %}
+    {% assign handle = firstProductCollection.handle %}
+    {% assign slider_container_class = "slider-container-" | append: handle %}
+    {% include 'product-slider' with collection: collections[handle], slider_container_class: slider_container_class %}
+  </div>
+</section>
+<script src="https://unpkg.com/normalize-diacritics@latest/dist/normalize-diacritics.umd.min.js"></script>
+<script>
+  var normalize = window.NormalizeDiacritics.normalize;
+
+  async function fetchCollection(handle){
+    console.log("Getting collection for: " + handle);
+    return window.fetch('https://chocorush.myshopify.com/api/2019-07/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json',
+        "X-Shopify-Storefront-Access-Token":"717e8f5d8d789bf17e40b2672a246ae5",
+        "Accept":'application/json' },
+      body: JSON.stringify({ query: `
+          {
+            collectionByHandle(handle: "`+handle+`") {
+              id
+              image {
+                originalSrc
+              }
+              description,
+              descriptionHtml,
+              title,
+              handle
+            }
+          }
+        ` })
+    })
+    .then(res => res.json())
+    .then(res => populatePage(res.data, handle))
+    .catch(function(res){
+      if(res.error){return false;}
+    });
+  }
+
+  function populatePage(data,handle){
+    if(!data.collectionByHandle){return false;}
+    var col = data.collectionByHandle;
+    var title = col.title;
+    console.log(col);
+    var tag = handle.split(/\s*\-\s*/g)[0];
+    var elementBox = $("#"+tag);
+
+    $(elementBox).find("a").text(col.title).attr('href',`/collections/${col.handle}`);
+    $(elementBox).find(".desc").html(col.descriptionHtml);
+
+    if(tag === 'region' || tag === 'estate'){
+      if(col.image !== null){
+        console.log("Image is valid, setting src");
+        $("#"+tag+"-image").find("img").attr("src",col.image.originalSrc);
+        $("#"+tag+"-image").addClass("populated")
+      } else if(tag === 'region') {
+        $("#"+tag+"-image").remove();
+      }
+    }
+    $(elementBox).addClass("populated");
+    return true;
+  }
+
+
+  var ObjectifyTags = function ObjectifyTags(arr) {
+  var finalObj = {};
+  arr.forEach(function (item, i) {
+    var splitItem = item.split(/\s*\-\s*/g);
+    if (splitItem.length === 1) return;
+
+    if (typeof finalObj[splitItem[0]] === "undefined") {
+      finalObj[splitItem[0]] = [splitItem[1]];
+    } else {
+      finalObj[splitItem[0]].push(splitItem[1]);
+    }
+  });
+  return finalObj;
+  };
+
+  function restructureString(value){
+    return value.replace(/\s+/g, '-');
+  }
+
+  var tagObject = ObjectifyTags(window.tagArray);
+
+  function handleError(error = null, prefix = null){
+    if (prefix){
+      console.log(error);
+      $("#"+prefix).remove();
+      if(prefix === "region"){
+        $("#"+prefix+"-image").remove();
+      }
+    }
+    else if (error){
+      //console.log(error);
+    }
+    else{
+      //console.log("welp, some sorta thing didn't work");
+    }
+  }
+
+  var buildHandle = async function(tagPrefix, tag){
+    if(typeof tag === 'undefined'){
+      handleError("Tag Not Found",tagPrefix);
+      return false;
+    }
+    else{
+      var normalizeTag = await normalize(tagPrefix + "-" + tag[0]);
+      var finalResult = await fetchCollection(restructureString(normalizeTag))
+      if(!finalResult){
+        handleError("Tag is valid, but there no collection with that handle",tagPrefix);
+        return false;
+      }
+      return true;
+    }
+  }
+
+  var buildInfoSection = async function(){
+    var region = await buildHandle("region",tagObject.region);
+    var estate = await buildHandle("estate",tagObject.estate);
+    var strain = await buildHandle("strain",tagObject.strain);
+
+    if(!region && !estate && !strain){
+      $(".product-info").remove();
+    } else if(!region){
+      $("#rgn").remove();
+    } else if(!estate && !strain){
+      $("#estate-image").remove();
+    }
+  }
+
+  buildInfoSection();
+</script>
+{% comment %}
+  rest of product page goes here
+{% endcomment %}
+
+<div class="hidden py-8 border-b border-solid border-black">
+  <h1 class="h2">Collections:</h1>
+  {% for collection in product.collections %}
+    <div class="my-4">
+      <p>
+        <strong>Collection title: </strong>{{ collection.title }}
+      </p>
+      <p>
+        <strong>Collection description: </strong>{{ collection.description || "No collection description" }}
+      </p>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="hidden py-8 border-b border-solid border-black">
+  <h1 class="h2">Tags:</h1>
+  {% for tag in product.tags %}
+      <p>{{ tag }}</p>
+  {% endfor %}
+</div>
+
+<div class="hidden">
+{% section 'product-recommendations' %}
+</div>
+
+<style>
+  .tooltiptext{
+    font-size:.45rem!important;
+    width:70px!important;}
+    
+</style>
+{% for tag in product.tags %}
+  {% if tag contains 'nosidebar' %}
+    <script>
+      $(document).ready(function () {  
+    $('#review-link').click(function(event){
+      event.preventDefault();
+      document.getElementById('judgeme_product_reviews').scrollIntoView({
+  behavior: 'smooth'});
+
+    });
+});
+    </script>
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% include 'elevar-head' %}
+                
+{% render 'orbislabs_sitemap_noindex' %}
+
+  <!-- {{ page.handle }} {{ shop.url }}-->
+  <title>{{ page_title }}</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="{{ page_description | escape }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/6590518/7384832/css/fonts.css" />
+  {{ content_for_header }} <!-- Header hook for plugins -->
+  <!--begin-bc-sf-filter-css-->
+  {% include 'bc-sf-filter-style' %}
+  <!--end-bc-sf-filter-css-->
+  {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+  {{ 'styles.css' | asset_url | stylesheet_tag }}
+  {{ 'custom.css' | asset_url | stylesheet_tag }}
+  {{ 'vendor.js' | asset_url | script_tag }}
+  {{ 'ui-ajax.js' | asset_url | script_tag }}
+  {{ 'lazysizes.min.js' | asset_url | script_tag }}
+  
+  <meta itemprop="name" content="Bar & Cocoa - Craft Chocolate | Dark Chocolate Gifts"/>
+<title>{% if template contains "index" %}Bar & Cocoa - Craft Chocolate | Dark Chocolate Gifts{% else %}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}
+  {% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
+
+  <link rel="icon" type="image/png" href="https://cdn.shopify.com/s/files/1/1120/9400/files/barcocoa-favicon.png?v=1605069127" />
+  <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | asset_url }}" />
+{% if page_description %}
+<meta name="description" content="{{ page_description | escape }}" />
+{% endif %}
+<link rel="canonical" href="{{ canonical_url }}" />
+	<meta itemprop="url" content="https://barandcocoa.com"/>
+	<meta itemprop="description" content="Bar & Cocoa - world's best dark chocolate, chocolate subscription and chocolate gifts from craft & bean to bar chocolate makers. Shop over 900 different chocolate bars."/>
+	<meta itemprop="thumbnailUrl" content="https://cdn.shopify.com/s/files/1/1120/9400/files/BarandCocoa_embossedLogo.png?v=1605067176"/>
+	<link rel="image_src" href="https://cdn.shopify.com/s/files/1/1120/9400/files/BarandCocoa_embossedLogo.png?v=1605067176" />
+	<meta itemprop="image" content="https://cdn.shopify.com/s/files/1/1120/9400/files/BarandCocoa_embossedLogo.png?v=1605067176"/>
+	<meta name="twitter:title" content="Bar & Cocoa - Craft Chocolate | Dark Chocolate Gifts"/>
+	<meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/1120/9400/files/BarandCocoa_embossedLogo.png?v=1605067176"/>
+	<meta name="twitter:url" content="https://barandcocoa.com"/>
+	<meta name="twitter:card" content="summary"/>
+	<meta name="twitter:description" content="Bar & Cocoa - world's best dark chocolate, chocolate subscription and chocolate gifts from craft & bean to bar chocolate makers. Shop over 900 different chocolate bars."/>
+	<meta name="description" content="Bar & Cocoa - world's best dark chocolate, chocolate subscription and chocolate gifts from craft & bean to bar chocolate makers. Shop over 900 different chocolate bars." />
+<meta property="og:site_name" content="Bar & Cocoa - Craft Chocolate | Dark Chocolate Gifts">
+<meta property="og:title" content=" {{ page_title }} ">
+<meta property="og:description" content=" {{ page_description | escape }} ">
+<meta property="og:image" content="https://cdn.shopify.com/s/files/1/1120/9400/files/BarandCocoa_embossedLogo.png?v=1605067176">
+  {% comment %}
+                Product Thumbnail Slider
+    {{ 'glide.theme.min.css' | asset_url | stylesheet_tag }}
+  {% endcomment %}
+  {{ 'glide.core.min.css' | asset_url | stylesheet_tag }}
+
+  {% include 'social-media-tags' %}
+
+  {% include 'judgeme_core' %}
+  <style>
+</style>
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=JvpWL8"></script>
+
+<!-- REAMAZE INTEGRATION START - DO NOT REMOVE -->
+{% render 'reamaze-config' %}
+{% render 'reamaze-sso' %}
+<!-- REAMAZE INTEGRATION END - DO NOT REMOVE -->
+ 
+{% include 'pagefly-header' %}
+
+<!-- Set noindex for Tasting pages -->
+{% if page.handle == '2w5hj' or page.handle == '2rqyf' or page.handle == '22wdc' or page.handle == '2p7xg' %}
+<meta name="robots" content="noindex">
+{% endif %}
+<!-- End noindex for Tasting pages -->
+ 
+ </head> 
+
+{% capture mwc_format %}{{ shop.money_with_currency_format | strip_html | json }}{% endcapture %}
+{% capture money_format %}{{ shop.money_format | strip_html | json }}{% endcapture %}
+
+<body class="font-body"
+data-show-currencies="{{ settings.show_multiple_currencies }}"
+data-currency-format="{{ settings.currency_format | default: 'money_with_currency_format' }}"
+data-shop-currency="{{ shop.currency }}"
+data-shop-mwc-format="{{ mwc_format | escape }}"
+data-money-format="{{ money_format | escape }}"
+data-default-currency="{{ settings.default_currency | default: shop.currency }}"
+>
+            {% comment %}
+              Accouncement bar installed by Builder.io
+              You may modify this code at any time
+            {% endcomment %}
+            {% include 'model.announcement-bar.builder' %}
+            
+
+  {% include 'elevar-body-end' %}
+  {% section 'header' %}
+
+  {{ content_for_layout }}
+
+  {% section 'footer' %}
+
+  {{ 'application.js' | asset_url | script_tag }}
+
+  {% comment %}
+                Product Thumbnail Slider
+  {% endcomment %}
+  {{ 'glide.min.js' | asset_url | script_tag }}
+
+
+<!--begin-bc-sf-filter-js-->
+  {% include 'bc-sf-filter' %}
+<!--end-bc-sf-filter-js-->
+{% comment %} Init BC Action List {% endcomment %}
+<!--start-bc-al-init-->
+  {% include 'bc-al-init' %}
+<!--end-bc-al-init-->
+{% comment %} Init Recently Viewed Products {% endcomment %}
+<!-- start-bc-recently-viewed-product-init -->
+  {% include 'bc-recently-viewed-product-init' %}
+<!-- end-bc-recently-viewed-product-init -->
+{% comment %} Init Most Popular Widgets {% endcomment %}
+<!--start-bc-most-popular-product-init-->
+  {% include 'bc-most-popular-product-init' %}
+<!--end-bc-most-popular-product-init-->
+
+<style>
+  .satcb_quick_buy{
+    display: none !important;
+  }
+  .bc-action-list-wrapper {
+    display: none !important;
+  }
+  .satcb_quick_buy {
+    display: none !important;
+  }
+</style>
+
+{% include 'notification-system' %}
+
+<!-- Klaviyo Back in Stock button -->
+
+<script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script>
+    var klaviyo = klaviyo || [];
+    klaviyo.init({
+      account: "JvpWL8",
+      platform: "shopify"
+    });
+    klaviyo.enable("backinstock",{
+    trigger: {
+      product_page_text: "Notify Me When Available",
+      product_page_class: "action_button add_to_cart",
+      product_page_text_align: "center",
+      product_page_margin: "0px",
+      replace_anchor: false
+    },
+    modal: {
+     headline: "{product_name}",
+     body_content: "Register to receive a notification when this item comes back in stock.",
+     email_field_label: "Email",
+     button_label: "Notify me when available",
+     subscription_success_label: "You're in! We'll let you know when it's back.",
+     footer_content: '',
+     additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
+     drop_background_color: "#000",
+     background_color: "#fff",
+     text_color: "#222",
+     button_text_color: "#fff",
+     button_background_color: "#439fdb",
+     close_button_color: "#ccc",
+     error_background_color: "#fcd6d7",
+     error_text_color: "#C72E2F",
+     success_background_color: "#d3efcd",
+     success_text_color: "#1B9500"
+    }
+  });
+</script>
+ {% include 'smile-initializer' %}
+
+<!--BeginCFFPersistentCartCart-->
+{% if customer %}
+<script>
+
+    window.cffCustomer = {
+        name: '{{customer.name}}',
+        email: '{{customer.email}}',
+        hasAccount: '{{customer.has_account}}',
+        id: '{{customer.id}}'
+    };
+
+
+</script>
+
+{% endif %}
+
+<script>
+    window.cffPCLiquidPlaced = true
+</script>
+
+<!--EndCFFPersistentCartCart--><!-- This line added automatically by JSON-LD for SEO. -->{% include 'jsonld-for-seo' %}
+	{% render 'flits_snippet' %}
+</body>
+</html>

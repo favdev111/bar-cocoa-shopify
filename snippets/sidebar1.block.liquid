@@ -1,0 +1,29 @@
+{% comment schema %}
+	{
+	"name": "Menu - History"
+	}
+{% endcomment %}
+
+<div>
+  <ul class="learn_menues">
+{% for link in linklists.chocolate-history.links %}
+  <li class="level1"><a href="{{ link.url }}">{{ link.title }}</a>
+{% if link.links != blank %}
+    {% for child_link in link.links %}  
+    <li class="level2"><a href= "{{ child_link.url }}">{{ child_link.title }}</a>
+    {% if child_link.links != blank %}      
+      {% for grandchild_link in child_link.links %}  
+        <li class="level3"><a href= "{{ grandchild_link.url }}">{{ grandchild_link.title }}</a></li>
+      {% endfor %}
+    {% endif %}   
+    </li>
+    {% endfor %}
+{% endif %} 
+</li>
+{% endfor %}
+</ul>
+</div>
+
+{% if page.handle  == 'chocolate-history' %}
+  <a href="/pages/learn" class="menu-subtitle">Learn more</a>
+{% endif %}

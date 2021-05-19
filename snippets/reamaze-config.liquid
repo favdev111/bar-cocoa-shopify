@@ -1,0 +1,167 @@
+<!-- Reamaze Config file - DO NOT REMOVE -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support.account = "barandcocoa";
+</script>
+<!-- reamaze_embeddable_7930_s -->
+<!-- Embeddable - Bar & Cocoa Chat / Contact Form Shoutbox -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support['account'] = 'barandcocoa';
+  _support['ui']['contactMode'] = 'traditional';
+  _support['ui']['enableKb'] = 'false';
+  _support['ui']['styles'] = {
+    widgetColor: 'rgb(237, 114, 52)',
+    gradient: true,
+  };
+  _support['ui']['widget'] = {
+    displayOn: 'all',
+    label: {
+      text: 'Need recs?',
+      mode: "prompt-3",
+      delay: 8,
+      duration: 12,
+    },
+    position: {
+      bottom: '30px',
+      right: '22px'
+    },
+    size: 58,
+    mobilePosition: {
+      bottom: '22px',
+      right: '18px'
+    },
+    mobileSize: 50
+  };
+  _support['apps'] = {
+    recentConversations: {},
+    faq: {"enabled":false},
+    orders: {"enabled":true,"enable_notes":false}
+  };
+</script>
+<!-- reamaze_embeddable_7930_e -->
+
+
+
+
+
+
+
+<!-- reamaze_cue_2333_s -->
+<!-- Cue - Check out thank you -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support.outbounds = _support.outbounds || [];
+  _support.outbounds.push({
+    id: "2333",
+    name: "Check out thank you",
+    message: "Thank you for your order!  We're grateful you chose to shop with Bar &amp; Cocoa. We're on a mission to turn chocolate into a force for sustainability and ethical trade, and your order helps us get there. \n\nSincerely \nPashmina",
+    sound: false,
+    transient: true,
+    botsEnabled: false,
+    disableCueClick: true,
+    enableCustomFields: false,
+    start: "",
+    end: "",
+    user: {
+      type: "staff",
+      name: "Pashmina",
+      staffName: "Pashmina",
+    },
+    rules: [
+      {
+        type: "url",
+        op: "contains",
+        value: "/checkout/thank_you",
+      },
+    ],
+  });
+</script>
+<!-- reamaze_cue_2333_e -->
+
+
+
+<!-- reamaze_cue_25550_s -->
+<!-- Cue - Shipping Help -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support.outbounds = _support.outbounds || [];
+  _support.outbounds.push({
+    id: "25550",
+    name: "Shipping Help",
+    message: "Looking for your order details?",
+    sound: true,
+    transient: true,
+    botsEnabled: true,
+    disableCueClick: false,
+    enableCustomFields: false,
+    start: "",
+    end: "",
+    user: {
+      type: "team"
+    },
+    rules: [
+      {
+        type: "url",
+        op: "contains",
+        value: "help",
+      },
+    ],
+  });
+</script>
+<!-- reamaze_cue_25550_e -->
+
+
+
+
+
+
+
+<!-- reamaze_cue_27971_s -->
+<!-- Cue - Mother's Day -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support.outbounds = _support.outbounds || [];
+  _support.outbounds.push({
+    id: "27971",
+    name: "Mother's Day",
+    message: "Looking for a Mother's Day Gift? Our Bar & Cocoa Signature Gift Box is a big hit, and makes gifting super easy! ",
+    sound: true,
+    transient: true,
+    botsEnabled: false,
+    disableCueClick: false,
+    enableCustomFields: false,
+    start: "2021-04-14T06:00:00.000Z",
+    end: "2021-05-06T06:00:00.000Z",
+    user: {
+      type: "brand"
+    },
+    buttons: [
+      {
+        text: "Check It Out",
+        url: "https://barandcocoa.com/products/chocolate-gift-boxes ",
+        target: "_top",
+      },
+    ],
+    rules: [
+      {
+        type: "timeOnPage",
+        op: "greaterThan",
+        value: "30s",
+      },
+      {
+        type: "customValue",
+        op: "isTrue",
+        customValue: {% if customer.orders_count < 2 %}true{% else %}false{% endif %},
+      },
+      {
+        type: "url",
+        op: "contains",
+        value: "gift",
+      },
+    ],
+  });
+</script>
+<!-- reamaze_cue_27971_e -->
+
+

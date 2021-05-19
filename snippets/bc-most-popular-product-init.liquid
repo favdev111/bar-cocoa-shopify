@@ -1,0 +1,14 @@
+<!-- start-bc-popular-product-init -->
+{% if template contains 'collection' %}
+  {%- assign bc_shop_metafields = shop.metafields.bc-sf-filter -%}
+  {%- if bc_shop_metafields.mostPopularEnable == 'true' -%}
+    <script>
+      if(typeof bcSfFilterParams == 'undefined'){
+        var bcSfFilterParams = {{ bc_shop_metafields.settings }};
+      } 
+    </script>
+    <script defer src="{{ 'bc-most-popular-product-lib.min.js' | asset_url }}"></script>
+    <script defer src="{{ 'bc-most-popular-product-init.js' | asset_url }}"></script>
+  {% endif %}
+{% endif %}
+<!-- end-bc-popular-product-init -->

@@ -1,0 +1,206 @@
+{%- capture bc_layout -%}
+{%- case layout -%}
+
+{%- when 'productGridItemHtml' -%}
+
+<div class="collection-page-product-wrapper">
+
+  <div class="product-card [[itemNew]] p-id-[[itemId]]">
+    {% comment %}
+    <script class="bc-sf-filter-product-script" data-id="bc-product-json-[[itemId]]" type="application/json">[[itemJson]]</script>
+    {% endcomment %}
+    <div class="product-card-content">
+      <div class="add-to-cart-wrapper">
+        <div class="add-to-cart-mobile">
+          <div class="add-button flex atc-[[itemId]]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96.16 94.91">
+              <defs>
+                <style>
+                  .a,
+                  .b {
+                    fill: none;
+                    stroke: #fff;
+                    stroke-width: 6px;
+                  }
+            
+                  .a {
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                  }
+            
+                  .b {
+                    stroke-miterlimit: 10;
+                  }
+                </style>
+              </defs>
+              <polyline class="a" points="3 3 18.41 3 27.33 49.97 30.25 68.18 73.23 68.18" />
+              <path class="a" d="M284.06,353.2l-50.44,0Z" transform="translate(-206.28 -303.21)" />
+              <line class="a" x1="93.16" y1="14.48" x2="77.78" y2="49.99" />
+              <circle class="b" cx="65.92" cy="84.91" r="7" />
+              <circle class="b" cx="39.76" cy="84.91" r="7" />
+              <line class="a" x1="52.48" y1="6.41" x2="52.48" y2="33.03" />
+              <line class="a" x1="65.65" y1="19.72" x2="39.69" y2="19.72" />
+            </svg>
+          </div>
+          <div class="added-button flex hidden added-to-cart-[[itemId]]">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 28.2 20.1" xml:space="preserve">
+               <polygon class="check-svg" points="3.2,9.5 9.3,16 24.9,0.5 26.9,2.7 9.5,20.2 1,11.6 "/>
+            </svg>
+          </div>
+        </div>
+        <div class="add-to-cart atc-[[itemId]]">
+          <div class="loading-rotator">
+            <img src="{{'rotator-arrow.svg' | asset_url}}"></img>
+          </div>
+          <div class="self-center">
+            <div class="atc-[[itemId]]">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 24 24" xml:space="preserve">
+                <path class="arrow-up-white" d="M0,12l2.1,2.1l8.4-8.4V24h3V5.7l8.4,8.4L24,12L12,0L0,12z"/>
+              </svg>
+              <p>ADD TO CART</p>
+            </div>
+            <div class="hidden added-to-cart-[[itemId]]">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                   viewBox="0 0 28.2 20.1" xml:space="preserve">
+                 <polygon class="arrow-up-white" points="3.2,9.5 9.3,16 24.9,0.5 26.9,2.7 9.5,20.2 1,11.6 "/>
+              </svg>
+              <a href="/cart">GO TO CART</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="product-image" href="[[itemUrl]]">
+        [[itemImages]]
+      </a>
+      <a href="[[itemUrl]]" class="text-link-orange block mb-0">[[itemTitle]]</a>
+      <p>[[itemPrice]]</p>
+    </div>
+
+    <!-- ADD-TO-CART FUNCTION -->
+    <script>
+      let did_init_[[itemId]] = false;
+      $(document).ready(init_[[itemId]])
+
+      if (did_init_[[itemId]] === false) {
+        init_[[itemId]]()
+      }
+
+      function init_[[itemId]] () {
+          /* ****************************
+          *   Add to cart button handler
+          * ***************************/
+          const addToCartButtons = $(".atc-[[itemId]]");
+            addToCartButtons.on('click', async (e) =>{
+                const data = {
+                    items: [
+                        {
+                            quantity: 1,
+                            id: "[[itemVariantId]]"
+                        }
+                    ]
+                };
+                $('.p-id-[[itemId]]').find('.add-to-cart').addClass('adding');
+                await atcAjax(data, onSuccess, onError);
+            })
+
+          /* ****************************
+          *   Add to cart callbacks
+          * ***************************/
+
+            function onSuccess(cart){
+              addToCartButtons.addClass('hidden');
+              $(".added-to-cart-[[itemId]]").removeClass('hidden');
+              setTimeout(()=>{
+                $('.p-id-[[itemId]]').find('.add-to-cart').removeClass('adding');
+              },250);
+              updateCartIconAjax(cart.item_count)
+            }
+
+            function onError(error){
+              console.log("Error attempting to add item to cart: ", error);
+            }
+
+            did_init_[[itemId]] = true;
+      }
+    </script>
+  </div>
+</div>
+
+
+
+
+
+{%- when 'paginateHtml' -%}
+<ul>[[previous]][[pageItems]][[next]]</ul>
+
+{%- when 'previousActiveHtml' -%}
+<li>
+  <a href="[[itemUrl]]" class="backward">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+      <path d="M30,18l-2.115-2.115L19.5,24.255V6h-3V24.255L8.13,15.87,6,18,18,30Z" transform="translate(-6 30) rotate(-90)" fill="#d4b461"/>
+    </svg>
+  </a>
+</li>
+
+{%- when 'previousDisabledHtml' -%}
+<li class="disabled backward">
+  <span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+      <path d="M30,18l-2.115-2.115L19.5,24.255V6h-3V24.255L8.13,15.87,6,18,18,30Z" transform="translate(-6 30) rotate(-90)" fill="#d4b461"/>
+    </svg>
+  </span>
+</li>
+
+{%- when 'nextActiveHtml' -%}
+<li>
+  <a href="[[itemUrl]]">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+      <path d="M30,18l-2.115-2.115L19.5,24.255V6h-3V24.255L8.13,15.87,6,18,18,30Z" transform="translate(-6 30) rotate(-90)" fill="#d4b461"/>
+    </svg>
+  </a>
+</li>
+
+{%- when 'nextDisabledHtml' -%}
+<li class="disabled">
+  <span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+      <path d="M30,18l-2.115-2.115L19.5,24.255V6h-3V24.255L8.13,15.87,6,18,18,30Z" transform="translate(-6 30) rotate(-90)" fill="#d4b461"/>
+    </svg>
+  </span>
+</li>
+
+
+{%- when 'pageItemHtml' -%}
+<li><a href="[[itemUrl]]">[[itemTitle]]</a></li>
+
+{%- when 'pageItemSelectedHtml' -%}
+<li><span class="active">[[itemTitle]]</span></li>
+
+{% when 'pageItemRemainHtml' %}
+<li><span>[[itemTitle]]</span></li>
+
+{%- when 'sortingHtml' -%}
+<label><span><span> {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} {{ temp }} {% else %} Sorting {% endunless %}, </span></span></label><ul class="bc-sf-filter-filter-dropdown">[[sortingItems]]</ul>
+
+{%- when 'showLimitHtml' -%}
+<label> Show </label><select class="bc-sf-filter-filter-dropdown">[[showLimitItems]]</select>
+
+{%- when 'breadcrumbHtml' -%}
+<a href="/"> Home </a> [[breadcrumbDivider]] [[breadcrumbItems]]
+
+{%- when 'breadcrumbDivider' -%}
+<span class="divider">/</span>
+
+{%- when 'breadcrumbItemLink' -%}
+<a href="[[itemLink]]">[[itemTitle]]</a>
+
+{%- when 'breadcrumbItemSelected' -%}
+<span>[[itemTitle]]</span>
+
+{%- endcase -%}
+{%- endcapture -%}
+
+{%- assign str = '}}' -%}
+{{- bc_layout | json | replace: '[[', '{{' | replace: ']]', str -}}

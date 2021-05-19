@@ -1,0 +1,364 @@
+<div class="top-alert-bar">
+  <div class="container scrollbar-style-1 horizontal">
+    {% for block in section.blocks %}
+      <div class="link-wrapper">
+        <p class="inline-block">{{block.settings.leading}}</p>
+        {% if block.settings.cta %}
+          <a class="inline-block" href="{{block.settings.link}}">{{block.settings.cta}}</a>
+        {% endif %}
+      </div>
+      <p class="spacer">|</p>
+    {% endfor %}
+  </div>
+</div>
+<nav class="section-shadow desktop">
+  <div class="nav-wrapper nav-desktop">
+    <div class="container nav-container">
+      <div class="nav-left-section">
+        <a class="text-link js-nav-link uppercase" data-dropdown="shop">Shop</a>
+        <a class="text-link js-nav-link uppercase" data-dropdown="gifts">Gifts</a>
+        <a href="/pages/chocolate-club" class="text-link uppercase">Club</a>
+      </div>
+      <a href="/" class="nav-brand">
+        <img src="{{ 'brand-embossed.png' | asset_img_url : 'master' }}" class="brand-embossed"></img>
+        <img src="{{ 'Logo.svg' | asset_url }}" class="brand-svg"></img>
+      </a>
+      <div class="nav-right-section">
+        <a href="/collections/sale" class="text-link uppercase">Sale</a>
+        <a href="/pages/chocolate-makers" class="text-link uppercase">Makers</a>
+        <a role="button" class="text-link search-button"><img src="{{ 'Search.svg' | asset_url }}"/></a>
+      </div>
+      <div class="nav-cart">
+        <a href="/account" class="text-link relative mr-6"><img src="{{ 'Account.svg' | asset_url }}" style="width:24px"/></a>
+        <a href="/cart" class="text-link relative"><img src="{{ 'Cart.svg' | asset_url }}"/><span id="header-nav-cart-item-count">{{cart.item_count}}</span></a>
+      </div>
+    </div>
+    <div class="container search-container">
+      <div class="nav-search-wrapper">
+        <a class="nav-brand search-brand">
+          <img src="{{ 'Logo.svg' | asset_url }}"></img>
+        </a>
+
+        <form class="nav-search bc-sf-search-form" action="/search" method="get" role="search">
+          <p><img src="{{ 'Search.svg' | asset_url }}"/></p>
+          <input id="header-search-form-query" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search" class="bc-sf-search-box js-input-focus"></input>
+          <div class="search-underline"></div>
+          <button type="submit" class="nav-search-submit"><img src="{{ 'Arrow.svg' | asset_url }}"/></button>
+          <button class="nav-search-exit"><img src="{{ 'X.svg' | asset_url }}"/></button>
+          <script>
+          $(".search-button").click(function(){
+            $(".nav-desktop").addClass("search");
+            setTimeout(function(){
+              $('.js-input-focus').focus();
+              console.log(".js-input-focus");
+            },500);
+          });
+          </script>
+          <script>
+            $(".nav-search-exit").click(function(e){
+              e.preventDefault()
+              $(".nav-desktop").removeClass("search");
+            });
+          </script>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <div class="nav-dropdown section-shadow" tabindex="100">
+    <div class="container flex items-center h-full">
+      <div data-dropdown-endpoint="shop" class="nav-dropdown-panel">
+        <a class="nav-dropdown-link-main" href="/collections/all">Shop All Chocolate</a>
+        <div class="flex">
+          <ul>
+            <li><p class="font-bold">By Type</p></li>
+            <li><a href="/collections/100-dark-chocolate" class="text-link-orange-underline">100% Cacao</a></li>
+            <li><a href="/collections/dark" class="text-link-orange-underline">Dark</a></li>
+            <li><a href="/collections/milk-dark-milk-chocolate" class="text-link-orange-underline">Milk & Dark Milk</a></li>
+            <li><a href="/collections/white" class="text-link-orange-underline">White</a></li>
+            <li><a href="/collections/vegan" class="text-link-orange-underline">Vegan</a></li>
+            <li><a href="/collections/keto-friendly-chocolate" class="text-link-orange-underline">Keto Friendly</a></li>
+          </ul>
+          <ul>
+            <li><p class="font-bold">By Category</p></li>
+            <li><a href="/collections/bars" class="text-link-orange-underline">Chocolate Bars</a></li>
+            <li><a href="/collections/mini-bars-squares" class="text-link-orange-underline">Mini Bars & Squares</a></li>
+            <li><a href="/collections/confections-treats" class="text-link-orange-underline">Confections & Treats</a></li>
+            <li><a href="/collections/drinking-chocolate" class="text-link-orange-underline">Drinking Chocolate</a></li>
+            <li><a href="/collections/bulk-baking" class="text-link-orange-underline">Bulk & Baking</a></li>
+          </ul>
+          <ul>
+            <li><p class="font-bold">Featured Makers</p></li>
+            <li><a href="/collections/chocolaterie-a-morin" class="text-link-orange-underline">A. Morin</a></li>
+            <li><a href="/collections/domori" class="text-link-orange-underline">Domori</a></li>
+            <li><a href="/collections/firetree" class="text-link-orange-underline">Firetree</a></li>
+            <li><a href="/collections/islands-chocolate" class="text-link-orange-underline">Islands Chocolate</a></li>
+            <li><a href="/pages/chocolate-makers" class="text-link-orange-underline">Makers A to Z</a></li>
+          </ul>
+          <div class="flex flex-col ">
+            <a href="/collections/sale" class="button-alt-outline mb-6">Shop Sales</a>
+            <a href="/pages/chocolate-club" class="text-link-orange-underline text-center">Join the club!</a>
+          </div>
+        </div>
+        <div class="self-end flex justify-center items-center navbar-dropdown-image image-shop">
+          <img src="{{ 'navspread-2.png' | asset_img_url : '600x' }}"/>
+        </div>
+      </div>
+      <div data-dropdown-endpoint="gifts" class="nav-dropdown-panel">
+        <a class="nav-dropdown-link-main" href="/pages/gifts-new">Shop All Gifts</a>
+        <div class="flex">
+          <ul>
+            <li><p class="font-bold">Chocolate</p></li>
+            <li><a href="/products/chocolate-gift-boxes" class="text-link-orange-underline">Chocolate Gift Boxes</a></li>
+            <li><a href="/pages/chocolate-club" class="text-link-orange-underline">Chocolate Club</a></li>
+            <li><a href="/collections/chocolate-bundles" class="text-link-orange-underline">Chocolate Bundles</a></li>
+          </ul>
+          <ul>
+            <li><p class="font-bold">By Price</p></li>
+            <li><a href="/collections/chocolate-gifts-under-25" class="text-link-orange-underline">Gifts Under $25</a></li>
+            <li><a href="/collections/chocolate-gifts-under-50" class="text-link-orange-underline">Gifts Under $50</a></li>
+          </ul>
+        </div>
+        <div class="self-end flex justify-center items-center navbar-dropdown-image image-gift">
+          <a href="/products/chocolate-gift-boxes" class="pointer-cursor" style="height:100%">
+            <img src="{{ 'navspread-1.png' | asset_img_url : '600x' }}"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var navbarScroll = runTimer(function(){
+        var scroll = $(window).scrollTop();
+        closeDropdown();
+        if(scroll > 100){
+          $('body').addClass("scrolling");
+        }else{
+          $('body').removeClass("scrolling");
+        }
+      },250);
+    $(window).scroll(navbarScroll);
+
+    var dropDown = $('.nav-dropdown');
+    $(dropDown).focusout(function(){
+      setTimeout(function(){
+        if(!$(dropDown).is(":focus")){
+          closeDropdown();
+        }
+      },300);
+    });
+    var dropdownPanels = $(".nav-dropdown-panel");
+    var navLinks = $('.js-nav-link');
+    $('.js-nav-link').click(function(){
+      if($(this).hasClass("selected")){
+        $(this).removeClass("selected");
+        closeDropdown();
+        return;
+      }
+      var dropDownEndpoint = $(this).attr("data-dropdown");
+      openDropdown();
+      $(navLinks).each(function(i,item){
+        $(item).removeClass('selected');
+      });
+      $(this).addClass('selected');
+      $(dropdownPanels).each(function(i, item){
+        if($(item).attr("data-dropdown-endpoint") === dropDownEndpoint){
+          $(item).addClass('open');
+          return;
+        }
+        $(item).removeClass('open');
+      });
+    });
+
+    var openDropdown = function(){
+      $(dropDown).addClass('open');
+      $(dropDown).focus();
+    }
+    var closeDropdown = function(){
+      $(dropDown).removeClass('open');
+      clearSelectedClass();
+    }
+    var clearSelectedClass = function(){
+      $(navLinks).each(function(i, item){
+        $(item).removeClass("selected");
+      });
+    }
+    var isDropdownOpen = function(){
+      return $(dropdown).hasClass('open');
+    }
+
+    function runTimer(func,wait){
+      var timeout = null;
+      return function(){
+        if(timeout !== null){return;}
+        var context = this, args = arguments;
+        timeout = setTimeout(function(){
+          timeout = null;
+          func.apply(context,args);
+        },wait)
+      }
+    }
+  </script>
+</nav>
+<nav class="mobile section-shadow ">
+  <div class="nav-wrapper mobile">
+    <div class="nav-container justify-between">
+      <div class="nav-left-section">
+        <a class="burger js-mobile-nav-menu"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="svg-inline--fa fa-bars fa-w-14 fa-2x"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z" class=""></path></svg></a>
+      </div>
+      <a href="/" class="nav-brand small">
+        <img src="{{'Logo.svg' | asset_url}}"></img>
+      </a>
+      <div class="w-2/5 flex justify-end">
+        <div class="nav-cart">
+          <a href="/account" class="text-link relative mr-4"><img src="{{ 'Account.svg' | asset_url }}"/></a>
+          <a href="/cart" class="text-link relative"><img src="{{'Cart.svg' | asset_url}}"/><span id="mobile-nav-cart-item-count">{{cart.item_count}}</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-mobile-menu">
+    <a class="nav-mobile-menu-close js-mobile-menu-close" role="button"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 23.321 23.322">
+      <g id="Group_133" data-name="Group 133" transform="translate(-12624.439 -1578.439)">
+        <line id="Line_44" data-name="Line 44" y2="29.982" transform="translate(12646.7 1579.5) rotate(45)" fill="none" stroke="#ed6832" stroke-width="3"/>
+        <line id="Line_45" data-name="Line 45" y1="29.981" transform="translate(12646.7 1600.7) rotate(135)" fill="none" stroke="#ed6832" stroke-width="3"/>
+      </g>
+    </svg></a>
+    <ul class="nav-mobile-toplevel-links">
+      <li><a class="text-link-orange js-mobile-link uppercase" data-mobile-subpage="shop">Shop</a></li>
+      <li><a class="text-link-orange js-mobile-link uppercase" data-mobile-subpage="gifts">Gifts</a></li>
+      <li><a href="/pages/chocolate-club" class="text-link-orange uppercase">Club</a></li>
+      <li><a href="/collections/sale" class="text-link-orange uppercase">Sale</a></li>
+      <li><a href="/pages/chocolate-makers" class="text-link-orange uppercase">Makers</a></li>
+    </ul>
+
+    <form class="search-input search-input-dark nav-search orange full-line w-full mt-12 bc-sf-search-form mb-12" action="/search" method="get" role="search">
+      <input id="mobile-header-search-form-query" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Explore Our Chocolate" class="bc-sf-search-box special-search-button"></input>
+    </form>
+
+    {% if customer %}
+      <a class="text-link-orange mb-2" href="/account">Account</a>
+    {% else %}
+      <a class="text-link-orange mb-2" href="/account/login">Login</a>
+    {% endif %}
+
+    <a class="text-link-orange" href="/cart">Cart</a>
+
+    <div class="nav-mobile-menu-subpage js-mobile-subpage" data-mobile-subpage="shop">
+      <a class="nav-mobile-subpage-back js-subpage-back">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 24 24">
+        <path d="M12,24l2.1-2.1l-8.4-8.4H24v-3H5.7l8.4-8.4L12,0L0,12L12,24z"/>
+        </svg>
+      </a>
+      <div class="nav-mobile-subpage-header">
+        <p>Shop</p>
+      </div>
+      <a class="nav-mobile-link-main" href="/collections/all">Shop All Chocolate</a>
+      <div class="flex flex-col">
+        <ul>
+          <li><p class="font-bold">By Type</p></li>
+          <li><a href="/collections/100-dark-chocolate" class="text-link-orange-underline">100%</a></li>
+          <li><a href="/collections/dark" class="text-link-orange-underline">Dark</a></li>
+          <li><a href="/collections/milk-dark-milk-chocolate" class="text-link-orange-underline">Milk & Dark Milk</a></li>
+          <li><a href="/collections/white" class="text-link-orange-underline">White</a></li>
+          <li><a href="/collections/vegan" class="text-link-orange-underline">Vegan</a></li>
+          <li><a href="/collections/keto-friendly-chocolate" class="text-link-orange-underline">Keto Friendly</a></li>
+        </ul>
+        <ul>
+          <li><p class="font-bold">By Category</p></li>
+          <li><a href="/collections/bars" class="text-link-orange-underline">Chocolate Bars</a></li>
+          <li><a href="/collections/mini-bars-squares" class="text-link-orange-underline">Mini Bars & Squares</a></li>
+          <li><a href="/collections/confections-treats" class="text-link-orange-underline">Confections & Treats</a></li>
+          <li><a href="/collections/drinking-chocolate" class="text-link-orange-underline">Drinking Chocolate</a></li>
+          <li><a href="/collections/bulk-baking" class="text-link-orange-underline">Bulk & Baking</a></li>
+        </ul>
+        <ul>
+          <li><p class="font-bold">Featured Makers</p></li>
+          <li><a href="/collections/chocolaterie-a-morin" class="text-link-orange-underline">A. Morin</a></li>
+          <li><a href="/collections/domori" class="text-link-orange-underline">Domori</a></li>
+          <li><a href="/collections/firetree" class="text-link-orange-underline">Firetree</a></li>
+          <li><a href="/collections/islands-chocolate" class="text-link-orange-underline">Islands Chocolate</a></li>
+          <li><a href="/pages/chocolate-makers" class="text-link-orange-underline">Makers A to Z</a></li>
+        </ul>
+        <div class="flex flex-col ">
+          <a href="/collections/sale" class="button-alt-outline mb-6" role="button">Shop Sales</a>
+          <a href="/pages/chocolate-club" class="text-link-orange-underline text-center" class="text-link-orange-underline text-center">Join the club!</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-mobile-menu-subpage js-mobile-subpage" data-mobile-subpage="gifts">
+      <a class="nav-mobile-subpage-back js-subpage-back">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 24 24">
+        <path d="M12,24l2.1-2.1l-8.4-8.4H24v-3H5.7l8.4-8.4L12,0L0,12L12,24z"/>
+        </svg>
+      </a>
+      <div class="nav-mobile-subpage-header">
+        <p>Gifts</p>
+      </div>
+      <a class="nav-mobile-link-main" href="/pages/gifts-new">Shop All Gifts</a>
+      <div class="flex flex-col">
+        <ul>
+          <li><p class="font-bold">Chocolate</p></li>
+          <li><a href="/collections/gifts" class="text-link-orange-underline">Chocolate Gift Boxes</a></li>
+          <li><a href="/pages/chocolate-club" class="text-link-orange-underline">Chocolate Club</a></li>
+          <li><a href="/collections/chocolate-bundles" class="text-link-orange-underline">Chocolate Bundles</a></li>
+        </ul>
+        <ul>
+          <li><p class="font-bold">By Price</p></li>
+          <li><a href="/collections/chocolate-gifts-under-25" class="text-link-orange-underline">Gifts Under $25</a></li>
+          <li><a href="/collections/chocolate-gifts-under-50" class="text-link-orange-underline">Gifts Under $50</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    $('.js-mobile-nav-menu').click(function(){
+      $('.nav-mobile-menu').addClass('open');
+    });
+    $('.js-mobile-menu-close').click(function(){
+      $('.nav-mobile-menu').removeClass('open');
+    });
+    $('.js-subpage-back').click(function(){
+      $(this).parent().removeClass('open');
+    });
+    var subpages = $('.js-mobile-subpage');
+    $('.js-mobile-link').click(function(){
+      var subpage = $(this).attr("data-mobile-subpage");
+      $(subpages).each(function(i, item){
+        if($(item).attr('data-mobile-subpage') === subpage){
+          $(item).addClass('open');
+        }
+      });
+    });
+  </script>
+</nav>
+
+{% schema %}
+  {
+    "blocks":[
+      {
+        "type":"text",
+        "name": "Alert",
+        "settings":[
+          {
+            "id":"leading",
+            "type":"text",
+            "label":"Leading Text"
+          },
+          {
+            "id":"cta",
+            "type":"text",
+            "label":"Call To Action"
+          },
+          {
+            "id":"link",
+            "type":"text",
+            "label":"Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

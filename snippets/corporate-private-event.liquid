@@ -1,0 +1,63 @@
+<section class="section-padding bg-white">
+  <div class="container-small flex items-center justify-between flex-wrap sm:justify-center">
+    <div class="container-small flex justify-content-center flex-col items-center mb-6">
+      <h2 class="text-center ">Interested In A Corporate or Private Event</h2>
+      <p class="text-center">Contact Us To Set One Up</p>
+    </div>
+    <div class="w-1/2 sm:w-auto sm:mb-6">
+        {% form 'contact' %}
+          {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+          {{ form.errors | default_errors }}
+      	  <input type="hidden" name="contact[form]" value="Virtual Chocolate Tasting Experience Event - {{ shop.url }}{{ product.url }}">
+          <input type="text" id="privatEventFormName" name="contact[name]" placeholder="Name">
+          <input type="email" id="privatEventFormEmail" name="contact[email]" placeholder="Email">
+          <textarea rows="10" id="privatEventFormMessage" name="contact[body]" placeholder="Message"></textarea>
+          <input type="submit" value="Send">
+        {% endform %}
+    </div>
+    <div class="w-1/2 sm:w-auto pl-8 pr-4">
+      <p>At Bar &amp; Cocoa, we meticulously select our chocolate offerings. Each product we offer is crafted from fine quality cacao, making cocoa — not sugar or filler — the star ingredient. You can taste the uniqueness and complexity of different cacao origins with nuanced flavors, unlike mass-produced chocolate.</p>
+    </div>
+  </div>
+</section>
+<section class="section bg-white">
+  <div class="container-small flex justify-content-center flex-col items-center">
+    <h2 class="text-3xl text-center">PAST CLIENTS INCLUDE:</h2>
+    <div class="tasting-client-wrapper">
+      <div class="client-image">
+        <img src="{{'virtual-tasting-client-1.jpg' | asset_img_url: '150x' }}"/>
+      </div>
+      <div class="client-image">
+        <img src="{{'virtual-tasting-client-2.jpg' | asset_img_url: '150x' }}"/>
+      </div>
+      <div class="client-image">
+        <img src="{{'virtual-tasting-client-3.jpg' | asset_img_url: '150x' }}"/>
+      </div>
+      <div class="client-image">
+        <img src="{{'virtual-tasting-client-4.jpg' | asset_img_url: '150x' }}"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #privatEventFormName,
+  #privatEventFormEmail,
+  #privatEventFormMessage {
+  	width: 100%;
+    border: 1px #c2c2c2 solid;
+    padding: 5px 10px;
+    border-radius: 2px;
+    margin: 5px 0;
+        font-family: Montserrat;
+  }
+  input[type="submit"] {
+    font-size: 22px;
+    background-color: #ff7d58;
+    font-family: Montserrat;
+    font-weight: 400;
+    width: 100%;
+    padding: 5px;
+    color: #fff;
+  }
+</style>

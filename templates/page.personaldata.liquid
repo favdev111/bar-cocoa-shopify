@@ -1,0 +1,58 @@
+{% comment %}
+   Page Liquid for Easy GDPR Shopify app: https://apps.shopify.com/easy-gdpr
+   The 3 GDPR pages (Request Personal Data, My Personal Data, Edit Personal Data) should use this liquid.
+   PLEASE DON'T MODIFY
+{% endcomment %}
+<link rel="stylesheet" href="https://gdpr-app.firebaseapp.com/style.css" type="text/css"/>
+<div class="EG-container">
+<section class="blog-hero">
+    <div>
+        <img src="{{ 'post_image.png' | asset_img_url: '1920x' }}" class="image-cover"></img>
+    </div>
+</section>
+
+<section class="section-padding page-template">
+    <div class="container-xsmall">
+        {{ page.content }}
+    </div>
+</section>
+
+<section class="bg-dark section-padding">
+    <div class="container text-center">
+      <div class="max-w-800 mx-auto">
+      <h2 class="mb-12 font-fancy text-yellow">About Bar & Cocoa</h2>
+      <h2 class="mb-4 text-light">Quality Begins with Ethics</h2>
+      <p class="text-light mb-8">Ethics is a key ingredient to the world’s best chocolate. Bar & Cocoa’s selection supports a supply chain that is not only more transparent than fair trade or big-brand chocolate but also tastier! The makers we feature source their cacao through direct trade. Therefore, local cacao farmers are paid better and makers can nurture higher standards for premium quality cacao and sustainable agroforestry.</p>
+      <h2 class="mb-4 text-light">Taste the Difference. Discover Real Chocolate.</h2>
+      <p class="text-light">At Bar & Cocoa, we meticulously select our chocolate offerings. Each product we offer is crafted from fine quality cacao, making cocoa — not sugar or filler — the star ingredient. You can taste the uniqueness and complexity of different cacao origins with nuanced flavors, unlike mass-produced chocolate.</p>
+      <p class="text-light mb-8">This is an elevated experience that meets our exacting standards. <b>Eat Real Chocolate</b>. It’s better for you, the environment and it tastes really good.</p>
+      <h2 class="mb-4 text-light">About Us</h2>
+      <p class="text-light">
+        Once you’ve tasted real chocolate, the other stuff just won’t do.
+      </p>
+      <p class="text-light">
+        <b>Bar & Cocoa</b> is proud to house over 70+ chocolate makers from 40+ countries. We curate and add new chocolate makers as the craft chocolate scene grows. Our small but mighty team in Denver, CO packs each order with care to ensure your chocolate arrives safely to your door.
+      </p>
+    </div>
+  </section>
+
+<section class="section-padding">
+    <div class="container-small">
+        <h2 class="text-center text-4xl">Explore Our Chocolate</h2>
+        {% assign handle = 'homepage-featured' %}
+        {% assign slider_container_class = "slider-container-" | append: handle %}
+        {% include 'product-slider' with collection: collections[handle], slider_container_class: slider_container_class %}
+    </div>
+</section>
+
+</div>
+
+<div>
+{% if customer %}
+  {% assign hash_id = customer.id | append: '-' | append: shop.permanent_domain %}
+{% else %}
+  {% assign hash_id = '0-' | append: shop.permanent_domain %}
+{% endif %}
+  <input type="hidden" value="{{ hash_id | hmac_sha256: ")L+Cq`Bk=*8rpLmS" }}" id="eg_hmac" />
+  <input type="hidden" id="accounts_enabled" value="{{ shop.customer_accounts_enabled }}" />
+</div>

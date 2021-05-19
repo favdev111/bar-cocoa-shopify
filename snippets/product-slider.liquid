@@ -1,0 +1,104 @@
+{% comment %}
+    <!-- How to structure slider markup -->
+
+    <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                <li class="glide__slide">0</li>
+                <li class="glide__slide">1</li>
+                <li class="glide__slide">2</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+    </div>
+{% endcomment %}
+
+<div style="margin: auto;" class="{{ slider_container_class }} glide relative">
+    <div class="glide__track slider-track" data-glide-el="track">
+        <ul class="glide__slides slide-container">
+            <!-- ITERATE OVER PRODUCTS IN COLLECTION AND RENDER SNIPPET FOR EACH -->
+            {% for product in collection.products limit: 11 %}
+                {% if product.available %}
+                    <li class="glide__slide flex justify-center">
+                        {% include 'product-card' with product as product, collection as collection  %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <li class="glide__slide slider-final-card">
+                <!-- FINAL CARD IN THE SLIDER -->
+                <a href='{{ collection.url }}' class="{{card_selector_class}}">
+                    <p>View More {{ collection.title }}</p>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="glide__arrows slider-arrows" data-glide-el="controls">
+        <a role="button" class="glide__arrow glide__arrow--left slider-arrow left" data-glide-dir="<">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        	 viewBox="0 0 24 24" xml:space="preserve">
+        	  <path d="M12,24l2.1-2.1l-8.4-8.4H24v-3H5.7l8.4-8.4L12,0L0,12L12,24z"/>
+          </svg>
+        </a>
+        <a role="button" class="glide__arrow glide__arrow--right slider-arrow right" data-glide-dir=">">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          	 viewBox="0 0 24 24" xml:space="preserve">
+             <path d="M12,0L9.9,2.1l8.4,8.4H0v3h18.3l-8.4,8.4L12,24l12-12L12,0z"/>
+          </svg>
+        </a>
+    </div>
+</div>
+
+{% if tabbed %}
+    <!-- handle in tabbed-product-slider snipped -->
+{% else %}
+    <script>
+        $(document).ready(_ => {
+            const $sliderContainer = $('.{{ slider_container_class }}');
+            //const $sliderParent = $sliderContainer.parent();
+            const SCREENS = {
+                0: 325,
+                650: 600,
+                950: 900,
+                1200: 1200
+            }
+
+            function onResize() {
+                const curW = window.innerWidth;
+                const sliderWidth = Object.keys(SCREENS).reduce((acc, x) => (curW > x) ? SCREENS[x] : acc , SCREENS[0]);
+                $sliderContainer.css('max-width', sliderWidth)
+            }
+
+            $(window).resize(_ => {
+                onResize()
+                console.log($sliderContainer.css('max-width'))
+            })
+
+            onResize()
+
+            const Slider = new Glide('.glide.{{ slider_container_class }}', {
+                type: 'carousel',
+                perView: 4,
+                breakpoints: {
+                    1200: {
+                        perView: 3
+                    },
+                    950: {
+                        perView: 2
+                    },
+                    650: {
+                        perView: 1
+                    }
+                }
+            });
+
+            Slider.mount()
+        })
+    </script>
+{% endif %}

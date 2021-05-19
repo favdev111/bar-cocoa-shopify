@@ -1,0 +1,18 @@
+{% assign has_multiple_images = false %}
+{% if product.images.size > 1 %}
+  {% assign has_multiple_images = true %}
+{% endif %}
+
+<div class="swiper-container js-product-slideshow w-full h-full">
+  <div class="swiper-wrapper">
+    {% for image in product.images %}
+      <div class="swiper-slide js-product-slide">
+        {% include 'responsive-image' with image: image, max_width: 600, max_height: 640, wrapper_class: 'w-3/4 mx-auto h-full md:w-1/2 md:h-480 lg:w-full lg:h-full', image_class: 'w-full h-full object-cover' %}
+      </div>
+    {% endfor %}
+  </div>
+  {% if has_multiple_images and show_nav %}
+    <div class="js-slide-nav swiper-button-prev text-black left-0 lg:left-16"></div>
+    <div class="js-slide-nav swiper-button-next text-black right-0 lg:right-16"></div>
+  {% endif %}
+</div>

@@ -1,0 +1,52 @@
+{% if collection.products.count < 1 %}
+<div class="empty-collection">
+  <h1 class='text-center font-medium text-4xl mb-0'>{{collection.title}}</h1>
+  <p>Sorry, there are currently no products in this category.</p>
+
+  <section class="section-padding bg-white">
+    <div class="container-small">
+      {% include 'tabbed-product-slider' %}
+    </div>
+  </section>
+
+</div>
+{% else %}
+<section class="section-padding-description bg-gray">
+  <div class="max-w-800 mx-auto flex flex-col items-center">
+  {% if collection.handle == 'all' or collection.description == blank %}
+    <h1 class='text-center font-medium text-4xl mb-0'>{{collection.title}}</h1>
+  {% else %}
+    <h1 class='text-center font-medium'>{{collection.title}}</h1>
+    <p class='text-center collection-description js-desc'>{{collection.description}}</p>
+    <a class="text-link-orange-underline js-open">Read More</a>
+    <a class="text-link-orange-underline js-close">Close</a>
+    <script>
+      var desc = document.querySelector(".js-desc");
+      var isOpened = false;
+      function isOverflown(element) {
+        return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
+      }
+      function handleReadMore(){
+        if(isOverflown(desc) && !isOpened){
+          $(".js-open").show();
+        }else if(!isOpened){
+          $(".js-open").hide();
+        }
+      }
+      $('.js-open').click(function(){
+        $(".js-desc").addClass("open");
+        isOpened = true;
+      })
+      $('.js-close').click(function(){
+        $(".js-desc").removeClass("open");
+        isOpened = false;
+      })
+      handleReadMore();
+      setInterval(function(){
+        handleReadMore();
+      },1000)
+    </script>
+  {% endif %}
+</section>
+<div>{% section 'collection-template-bc-sf-filter' %}</div>
+{% endif %}

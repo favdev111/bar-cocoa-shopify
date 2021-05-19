@@ -1,0 +1,77 @@
+<section class="section-padding relative hero-gift-1">
+  <div class="background">
+    <img src="{{ 'hero5.jpg' | asset_img_url: 'master' }}" class="image-cover image-1"></img>
+    <img src="{{ 'hero5-tablet.jpg' | asset_img_url: 'master' }}" class="image-cover image-2"></img>
+  </div>
+  <!-- !FINISH! Adjust Hero -->
+  <div class="container relative z-index gift-hero-content-margin">
+    <div class="w-2/3 sm:w-full">
+      <h1 class="font-bold text-4xl mb-6 sm:text-3xl">Treat Yourself to Real Chocolate.<br/>
+      You'll Thank Us Later.</h1>
+      <p class="mb-6 max-w-500">Not only do our chocolate bars satisfy your cravings, but they also support the success of local chocolate makers from around the globe. With hundreds of chocolates to choose from, you’ll find the perfect match for your taste, your friend’s taste, your partner’s taste, and even your boss’s taste!</p>
+      <a href="/pages/chocolate-club" class="button-alt-outline">Join The Club</a>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-dark giftbox-graphic">
+  <div class="container flex justify-between lg:flex-wrap">
+    <div class="w-1/3 info-container relative z-10 lg:w-2/3 sm:w-full">
+      <h2 class="font-fancy text-light first-h2 mb-0">CHOCOLATE</h2>
+      <h2 class="font-fancy text-light second-h2">GIFT BOXES</h2>
+      <p class="text-light">Our craft chocolates are special for many reasons: they’re made from regional cacao beans, their flavors are unreal, and their quality is unmatched. You can choose eight (8) or ten (10) bars for your personalized gift box (with the option to include a message) or select one of our curated bundles that feature our favorite chocolates from the store. Either way, this gift is fool-proof and regift proof.</p>
+      <a href="/products/chocolate-gift-boxes" class="button-outline mb-0 mr-24 lg:mr-12 md:mr-0">Shop Gift Boxes</a>
+    </div>
+    <div class="w-2/3 lg:w-full">
+      <div class="giftbox-graphic mb-24">
+        <a class="relative block cursor-pointer" href="/products/chocolate-gift-boxes">
+          <img class="graphic" src="{{ 'box.png' | asset_img_url: 'master'}}"></img>
+          <div class="graphic-p-1"><p>Your option of dark, milk, or a variety selection of chocolate</p><div class="line"></div></div>
+          <div class="graphic-p-2"><p>Choice of 8 or 10 bars (includes free shipping)</p><div class="line"></div></div>
+          <div class="graphic-p-3"><p>A personalized note</p><div class="line"></div></div>
+          <div class="graphic-p-4"><p>Choice of 100% chocolate bars</p><div class="line"></div></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-gray">
+  <div class="container-small">
+    <div class="max-w-500 text-center mb-12 mx-auto sm:mb-6">
+      <h2 class="mb-6 text-4xl sm:text-2xl sm:mb-4">Chocolate Bundles</h2>
+      <p style="margin: 0 -15px">Our Chocolate Bundles feature flavors that cater to your taste. Whether it’s coffee, spicy, or boozy, we have a bundle for every palate. We also offer bundles created by our chocolate makers who’ve curated a deliciously sweet experience from their own selection of chocolates.</p>
+    </div>
+    {% assign handle = 'chocolate-bundles' %}
+    {% assign slider_container_class = "slider-container-" | append: handle %}
+    {% include 'product-slider' with collection: collections[handle], slider_container_class: slider_container_class %}
+    <div class="flex justify-center mt-6 sm:mt-0">
+      <a href="/collections/chocolate-bundles" class="button-alt-outline mb-0">Buy A Chocolate Bundle</a>
+    </div>
+  </div>
+</section>
+<section class="section-padding bg-green relative">
+  <div class="container flex justify-between lg:flex-col lg:items-center">
+    <div class="max-w-350 w-2/5 lg:w-4/5 lg:max-w-none lg:mt-6 md:w-full">
+      <h2 class="text-4xl mb-12 element-underline">Chocolate Subscription</h2>
+      <p class="mb-12">Bar & Cocoa’s Dark Chocolate Club offers subscribers a monthly delivery of four, decadent dark chocolate bars. These bars will change your perceptions of real chocolate. All dark chocolate bars are gluten and dairy-free.</p>
+      <a href="/pages/chocolate-club" class="button-alt-outline">Join The Club</a>
+    </div>
+    <div class="flex justify-between items-center w-3/5 lg:order-first lg:w-full sm:justify-center">
+      <img src="{{ 'box-5.png' | asset_img_url: 'x500'}}" class="w-1/2 px-4 sm:w-auto sm:max-h-300"/>
+      <img src="{{ 'box-2.png' | asset_img_url: 'x500'}}" class="w-1/2 px-4 sm:hidden"/>
+    </div>
+  </div>
+</section>
+<section class="section-padding" id="gifts-section">
+  <div class="container">
+    <h2 class="font-medium text-4xl mb-12 text-center">More Chocolate Gifts</h2>
+    <div class=" flex justify-center flex-wrap">
+      {% for gift in collections["gifts"].products limit: 48 %}
+        {% if gift.available %}
+          <div class="collection-page-product-wrapper">
+            {% include 'product-card' with gift as product, collections["gifts"] as collection %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

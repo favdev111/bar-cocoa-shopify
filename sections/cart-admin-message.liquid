@@ -1,0 +1,17 @@
+<script>
+    window.cartAdminMessage = "{{ section.settings.adminMessage }}";
+</script>
+{{  }}
+{% schema %}
+  {
+    "name": "Cart admin message",
+    "settings": [
+      {
+        "id": "adminMessage",
+        "type": "text",
+        "label": "Admin Message",
+        "default": "FREE SHIPPING ON U.S. ORDERS OVER $60!"
+      }
+    ]
+  }
+{% endschema %}

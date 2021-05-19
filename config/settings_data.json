@@ -1,0 +1,63 @@
+{
+  "current": {
+    "flits_tracking_active_color": "#ed6832",
+    "flits_default_button_color": "#ed6832",
+    "flits_default_button_background_color": "rgba(0,0,0,0)",
+    "checkout_logo_image": "shopify:\/\/shop_images\/BarandCocoa_embossedLogo.png",
+    "checkout_logo_size": "large",
+    "checkout_sidebar_background_color": "#f3f2ef",
+    "checkout_accent_color": "#ea7d53",
+    "checkout_button_color": "#ea7d53",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "0678a186-61bc-4a67-be6b-687265ff2558": {
+            "type": "text",
+            "settings": {
+              "leading": "Shop",
+              "cta": "Mother's Day",
+              "link": "https:\/\/barandcocoa.com\/collections\/mothers-day-chocolate-gifts"
+            }
+          },
+          "0c7c3094-6154-4005-a760-54f738557b66": {
+            "type": "text",
+            "settings": {
+              "leading": "Get",
+              "cta": "Our Club",
+              "link": "\/pages\/chocolate-club"
+            }
+          },
+          "32dce717-e520-4331-871f-2a430131c67d": {
+            "type": "text",
+            "settings": {
+              "leading": "Shop",
+              "cta": "New Arrivals",
+              "link": "\/collections\/new-arrivals"
+            }
+          }
+        },
+        "block_order": [
+          "0678a186-61bc-4a67-be6b-687265ff2558",
+          "0c7c3094-6154-4005-a760-54f738557b66",
+          "32dce717-e520-4331-871f-2a430131c67d"
+        ],
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      },
+      "cart-admin-message": {
+        "type": "cart-admin-message",
+        "settings": {
+          "adminMessage": "Flat Summer Shipping Surcharge $5.99 For $90+ Orders & $9.99 Under $90"
+        }
+      }
+    },
+    "content_for_index": []
+  },
+  "presets": {
+    "Default": {}
+  }
+}

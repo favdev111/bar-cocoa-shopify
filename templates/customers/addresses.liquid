@@ -1,0 +1,120 @@
+<!-- /templates/customers/addresses.liquid -->
+{% unless customer  %}
+  <script>
+    window.location.replace( '/login' );
+  </script>
+{% endunless %}
+<section class="section-padding bg-gray relative">
+  <div class="account-extra-color"></div>
+  <div class="container mb-8 relative z-10">
+    <h1 class="text-4xl font-medium">Hi {{ customer.first_name }}. Here are your addresses on file</h1>
+    <a class="text-link-orange-underline mb-0" href="/account">Back To Account</a>
+  </div>
+  <div class="container relative z-10 flex">
+    <div class="p-12 bg-white flex flex-col items-start max-w-500 w-full md:p-6">
+      {% if customer.addresses.size > 0 %}
+        <a class="button-alt mb-6" onclick="$('.account-lightbox').addClass('open')">Add Another Address</a>
+        <div class="address-list self-stretch">
+          {% for address in customer.addresses %}
+          <div class="address-item max-w-500 w-full">
+            <div>
+              <p>{{address.name}}</p>
+              <p>{{address.street}} {{address.country_code}}, {{address.province_code}}, {{address.city}}, {{address.zip}}</p>
+              <p>{{address.phone}}</p>
+              <a class="hidden text-link-orange-underline address-edit mr-6" >Set As Default</a>
+              <a class="text-link-orange-underline address-edit" >Edit</a>
+              <div class="address-delete" data-address-id="1234">
+                <form
+                    class="address-delete-form"
+                    method="post"
+                    action="/account/addresses/{{ address.id }}"
+                    data-confirm-message="Are you sure you want to delete this address?"
+                >
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit" class="focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 23.321 23.322">
+                    <g id="Group_133" data-name="Group 133" transform="translate(-12624.439 -1578.439)">
+                      <line id="Line_44" data-name="Line 44" y2="29.982" transform="translate(12646.7 1579.5) rotate(45)" fill="none" stroke="#CB5B2D" stroke-width="3"/>
+                      <line id="Line_45" data-name="Line 45" y1="29.981" transform="translate(12646.7 1600.7) rotate(135)" fill="none" stroke="#CB5B2D" stroke-width="3"/>
+                    </g>
+                  </svg>
+                </button>
+              </form>
+              </div>
+            </div>
+            <div class="address-edit-form" data-address-form-id="1234">
+              {% form 'customer_address', address %}
+                <label for="AddressFirstName_{{ form.id }}">First name</label>
+                <input type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}" required>
+                <label for="AddressLastName_{{ form.id }}">Last name</label>
+                <input type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" required>
+                <label for="AddressCompany_{{ form.id }}">Company</label>
+                <input type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{{ form.company }}">
+                <label for="AddressAddress1_{{ form.id }}">Address 1</label>
+                <input type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}" required>
+                <label for="AddressAddress2_{{ form.id }}">Address 2</label>
+                <input type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}">
+                <label for="AddressCity_{{ form.id }}">City</label>
+                <input type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" required>
+                <label for="AddressCountry_{{ form.id }}">Country</label>
+                <select id="AddressCountry_{{ form.id }}" class="address-country-option" data-form-id="{{ form.id }}" name="address[country]" data-default="{{ form.country }}" required>{{ all_country_option_tags }}</select>
+                <label for="AddressProvince_{{ form.id }}">State / Province</label>
+                <input id="AddressProvince_{{ form.id }}" name="address[province]" data-default="{{ form.province }}" required></input>
+                <label for="AddressZip_{{ form.id }}">Postal code</label>
+                <input type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" required>
+                <label for="AddressPhone_{{ form.id }}">Phone</label>
+                <input type="tel" id="AddressPhone_{{ form.id }}" name="address[phone]" value="{{ form.phone }}" required>
+                <div class="flex h-8 items-center">
+                  <div class="w-4 h-4 relative flex items-center justify-center">{{ form.set_as_default_checkbox }}</div>
+                  <label class="ml-2 flex-1" for="address_default_address_new">
+                    Set As Default
+                  </label>
+                </div>
+                <button class="button-alt" type="submit">Update</button>
+                <a class="button-alt-outline" onclick="$(this).parent().parent().removeClass('open')">Cancel</a>
+                <script>
+                    const countrySelector = document.querySelector('#AddressCountry_{{ form.id }}');
+                    const provinceSelector = document.querySelector('#AddressProvince_{{ form.id }}');
+                    const provinceWrapper = document.querySelector('#AddressProvinceContainer_{{ form.id }}');
+
+                    countryProvinceSelector.build(countrySelector, provinceSelector, {
+                        onCountryChange: (provinces) => provinceWrapper.classList.toggle(hideClass, !provinces.length),
+                    });
+                </script>
+              {% endform %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <h4 class="mb-4">No Addresses On File Yet</h4>
+        <a class="button-alt max-w-200 mb-0" onclick="$('.account-lightbox').addClass('open')">Add An Address</a>
+      {% endif %}
+    </div>
+  </div>
+  <script>
+    $('.address-edit').click(function(){
+      $(this).parent().next().toggleClass("open");
+    });
+    document.querySelectorAll('.address-delete-form').forEach(deleteForm => {
+      deleteForm.addEventListener('submit', event => {
+          const confirmMessage = event.target.getAttribute('data-confirm-message')
+                                  || 'Are you sure you wish to delete this address?';
+
+          if ( !window.confirm(confirmMessage) ) {
+              event.preventDefault();
+          }
+      });
+  });
+  </script>
+</section>
+{% include 'add-account' %}
+
+
+
+{% comment %}
+  TODO
+   - colon after page header
+   - padding on inputs
+
+{% endcomment %}

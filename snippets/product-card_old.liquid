@@ -1,0 +1,81 @@
+<div class="" style="margin: auto;">
+    <div style="width: 225px; margin:auto;" class="p-4 flex flex-col">
+
+      <!-- PRODUCT IMAGE -->
+      <div class="w-full relative" style="padding-top: 100%;">
+        {% include 'responsive-image' with image: product.featured_image, max_width: 500, max_height: 500, wrapper_class: 'absolute top-0 left-0 w-full h-full', image_class: 'w-full h-full object-cover' %}
+      </div>
+
+      <!-- TITLE + LINK -->
+      <a class="text-buttonAlt underline" href="{{ product.url | within: collection }}">{{ product.title }}</a>
+
+      {% if product.available %}
+        <!-- PRICE -->
+        <p>{{ product.price_min | money }}</p>
+        <!-- ADD-TO-CART BUTTON -->
+        <a id="atc-gifts-slider-{{ product.id }}" role="button" class="hover:text-buttonAltHover text-buttonAlt">
+          Add to cart
+          <span id="atc-gifts-slider-{{ product.id }}-success-message" class="hidden"> - Succes!!</span>
+          <span id="atc-gifts-slider-{{ product.id }}-error-message" class="hidden"> - Error!!</span>
+        </a>
+      {% else %}
+        <p>Sold out</p>
+        <a disabled role="button" class="hover:text-buttonAltHover text-buttonAlt">Add to cart</a>
+      {% endif %}
+
+    </div>
+
+
+  <!-- ADD-TO-CART FUNCTION -->
+  <script>
+    $(document).ready(_ => {
+
+        /* ****************************
+        *   Add to cart button handler
+        * ***************************/
+          const $thisThumbnail = $("#atc-gifts-slider-{{ product.id }}");
+          $thisThumbnail.on('click', e => {
+              const data = {
+                  items: [
+                      {
+                          quantity: 1,
+                          id: "{{ product.selected_or_first_available_variant.id }}"
+                      }
+                  ]
+              };
+
+              // see `ui-ajax.js` in assets
+              atcAjax(data, onSuccess, onError)
+          })
+
+
+        /* ****************************
+        *   Add to cart callbacks
+        * ***************************/
+          function onSuccess () {
+            /*
+                Perform UI effects here whenever item has been successfully added to cart.
+                If you simply want to redirect the user to the cart you can do:
+
+                window.location.href = '/cart';
+            */
+            const $success = $('#atc-gifts-slider-{{ product.id }}-success-message');
+            $success.removeClass('hidden')
+            setTimeout(_ => { $success.addClass('hidden') }, 3000)
+
+            console.log("SUCCESS! This is the onSuccess callback reporting for duty.")
+          }
+
+          function onError (errorDescription) {
+            const $failure = $('#atc-gifts-slider-{{ product.id }}-error-message');
+            $failure.removeClass('hidden')
+            setTimeout(_ => { $failure.addClass('hidden') }, 3000)
+
+            console.log("Aw shoot! This is the onError callback bringing you bad news: ", errorDescription)
+            setTimeout(_ => {alert(errorDescription)}, 1)
+          }
+    })
+
+  </script>
+
+</div>
